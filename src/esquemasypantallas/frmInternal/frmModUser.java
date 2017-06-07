@@ -307,6 +307,7 @@ private Usuario asignar(Usuario user){
         user.setDui(jTxtDui.getText());
         user.setTel(jTxtTel.getText());
         user.setNivel(this.modUser.getNivel());
+        user.setIdUser(this.modUser.getIdUser());
         
         return user;
 }    

@@ -85,9 +85,22 @@ public class ControlUsuario implements OperacionesDB{
              Class.forName(db.getDriver());
             cn = (Connection) DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
             st = (Statement) cn.createStatement();
-            sql = "";
-            
-            msj = "";
+            sql = "UPDATE `sisfut`.`usuarios`\n" +
+"SET\n" +
+"`userNombre` = '"+user.getNombre()+"',\n" +
+"`userApellido` = '"+user.getApellido()+"',\n" +
+"`userName` = '"+user.getUsuario()+"',\n" +
+"`userPass` = '"+user.getContra()+"',\n" +
+"`userDui` = '"+user.getDui()+"',\n" +
+"`userTel` = '"+user.getTel()+"',\n" +
+"`userEmail` = '"+user.getEmail()+"',\n" +
+"`userLevel` = '"+user.getNivel()+"',\n" +
+"`userFnac` = '"+user.getFechaNac()+"'\n" +
+" WHERE `idUser` = "+user.getIdUser();
+            st.executeUpdate(sql);
+            msj = "Usuario modificado exitosamente!";
+            st.close();
+            cn.close();
         } catch (Exception e) {
             msj = e.toString();
         }

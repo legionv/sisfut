@@ -34,12 +34,7 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
     public frmVisorUsuarios() {
         
         initComponents();
-        try {
-            ControlUsuario cu = new ControlUsuario();
-            ArrayList<Usuario> u = cu.show();
-            llenarTabla(u);
-        } catch (Exception e) {
-        }
+        reset();
         
     }
 
@@ -60,6 +55,7 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jTxtFiltnom = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jBtnRefresh = new javax.swing.JButton();
 
         setClosable(true);
         setVisible(true);
@@ -106,6 +102,13 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Filtrar Resultado");
 
+        jBtnRefresh.setText("Actualizar Tabla");
+        jBtnRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnRefreshMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,9 +116,13 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTxtFiltnom, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(343, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTxtFiltnom, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                        .addComponent(jBtnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,6 +132,9 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTxtFiltnom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jBtnRefresh))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,9 +203,15 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
         filtrar();
     }//GEN-LAST:event_jTxtFiltnomKeyTyped
 
+    private void jBtnRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnRefreshMouseClicked
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_jBtnRefreshMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMod;
+    private javax.swing.JButton jBtnRefresh;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -265,6 +281,13 @@ DefaultTableModel tm= new DefaultTableModel(null,columnas);
      ControlUsuario cu = new ControlUsuario();
      llenarTabla(cu.filtrar(filtro));
  }
- 
+ public void reset(){
+  try {
+            ControlUsuario cu = new ControlUsuario();
+            ArrayList<Usuario> u = cu.show();
+            llenarTabla(u);
+        } catch (Exception e) {
+        }
+ }
    
 }
