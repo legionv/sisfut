@@ -109,7 +109,28 @@ public class ControlUsuario implements OperacionesDB{
 
     @Override
     public String delete(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Usuario user = (Usuario) obj;
+       Database db =new Database();
+       Connection cn;
+       ResultSet res;
+       Statement st = null;
+       String sql, msj;
+        try {
+           Class.forName(db.getDriver());
+            cn = (Connection) DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = (Statement) cn.createStatement();
+            sql = "Update usuarios set userDel = 0 where idUser = " + user.getIdUser();
+            st.executeUpdate(sql);
+            
+            msj = "Usuario eliminado exitosamente!";
+            st.close();
+            cn.close();
+            
+        } catch (Exception e) {
+            msj = e.toString();
+        }
+        
+        return msj;
     }
 
     @Override
@@ -124,7 +145,7 @@ public class ControlUsuario implements OperacionesDB{
             Class.forName(db.getDriver());
             cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
             st = (Statement) cn.createStatement();
-            sql= "select * from usuarios";
+            sql= "select * from usuarios where userDel != 0";
             res = st.executeQuery(sql);
             while (res.next()) {
                 lista.add(new Usuario(res.getInt("idUser"), 
@@ -207,7 +228,7 @@ public class ControlUsuario implements OperacionesDB{
             Class.forName(db.getDriver());
             cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
             st = (Statement) cn.createStatement();
-            sql= "select * from usuarios where userNombre like '%"+filtro+"%' or userApellido like '%"+filtro+"%' or userDui like '%"+filtro+"%' or userLevel like '%"+filtro+"%'";
+            sql= "select * from usuarios where (userNombre like '%"+filtro+"%' or userApellido like '%"+filtro+"%' or userDui like '%"+filtro+"%' or userLevel like '%"+filtro+"%') and userDel = 1";
             res = st.executeQuery(sql);
             while (res.next()) {
                 lista.add(new Usuario(res.getInt("idUser"), 

@@ -222,7 +222,9 @@ public class frmModUser extends javax.swing.JInternalFrame {
     private void jBtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarMouseClicked
         // TODO add your handling code here:
 
-        Usuario user =new Usuario();
+       int op = JOptionPane.showConfirmDialog(rootPane, "Está seguro que desea modificar este usuario?!","Confirmación",JOptionPane.YES_NO_OPTION);
+        if (op == 0) {
+             Usuario user =new Usuario();
      
         try {
 
@@ -246,6 +248,8 @@ public class frmModUser extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Seleccione un nivel de usuario", "Resultado",1);
+        }
+            
         }
 
     }//GEN-LAST:event_jBtnAgregarMouseClicked

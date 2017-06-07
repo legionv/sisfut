@@ -48,7 +48,7 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBtnEliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         btnMod = new javax.swing.JButton();
@@ -67,10 +67,10 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jBtnEliminar.setText("Eliminar");
+        jBtnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnEliminarMouseClicked(evt);
             }
         });
 
@@ -153,7 +153,7 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -169,19 +169,13 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(jBtnEliminar)
                     .addComponent(btnMod))
                 .addGap(45, 45, 45))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-       
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModMouseClicked
     modUser();
@@ -208,12 +202,28 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_jBtnRefreshMouseClicked
 
+    private void jBtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarMouseClicked
+        // TODO add your handling code here:
+        int fila = this.jTable2.getSelectedRow();
+         ControlUsuario cu = new ControlUsuario();
+        if (fila != -1) {
+            Usuario user = new Usuario();
+            user.setIdUser(Integer.parseInt(String.valueOf(this.jTable2.getValueAt(fila, 0))));
+        int op = JOptionPane.showConfirmDialog(rootPane, "Está seguro que desea eliminar este usuario?!","Eliminar",JOptionPane.YES_NO_OPTION);
+            if (op == 0) {
+                JOptionPane.showMessageDialog(rootPane, cu.delete(user),"Confirmación",JOptionPane.INFORMATION_MESSAGE);
+            }
+        
+        }
+        
+    }//GEN-LAST:event_jBtnEliminarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMod;
+    private javax.swing.JButton jBtnEliminar;
     private javax.swing.JButton jBtnRefresh;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
