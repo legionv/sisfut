@@ -293,12 +293,18 @@ public class frmUser extends javax.swing.JInternalFrame {
 
     private void jTxtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtUsuarioKeyTyped
         // TODO add your handling code here:
-        if(this.jTxtUsuario.getText().length() >=10){
-            evt.consume();
-        }
+      
+      
+        
+        Utilidades util =new Utilidades();
+      util.noSpecial(evt);
         if(Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
+          if(this.jTxtUsuario.getText().length() >=10){
+            evt.consume();
+        }
+       
     }//GEN-LAST:event_jTxtUsuarioKeyTyped
 
     private void jBtnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNewMouseClicked
@@ -310,7 +316,7 @@ public class frmUser extends javax.swing.JInternalFrame {
 
     private void jTxtPass1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtPass1KeyTyped
         // TODO add your handling code here:
-
+        
         if(this.jTxtPass1.getText().length() >= 8){
             evt.consume();
         }
@@ -326,6 +332,8 @@ public class frmUser extends javax.swing.JInternalFrame {
     private void jTxtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombreKeyTyped
         // TODO add your handling code here:
         char s = evt.getKeyChar();
+        Utilidades util =new Utilidades();
+      util.noSpecial(evt);
         if(this.jTxtNombre.getText().length() >=30){
             evt.consume();
         }
@@ -339,6 +347,8 @@ public class frmUser extends javax.swing.JInternalFrame {
         if(this.jTxtApellido.getText().length() >=30){
             evt.consume();
         }
+        Utilidades util =new Utilidades();
+      util.noSpecial(evt);
         char s = evt.getKeyChar();
         if(Character.isDigit(s) && s != KeyEvent.VK_SPACE){
             evt.consume();
