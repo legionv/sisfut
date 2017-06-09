@@ -23,12 +23,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Luis
  */
-public class frmInTor extends javax.swing.JInternalFrame {
+public class frmModTor extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmTorneos
      */
-    public frmInTor() {
+    public frmModTor(Torneo tr) {
         initComponents();
         comboEq();
     }

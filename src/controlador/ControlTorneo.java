@@ -23,26 +23,34 @@ public class ControlTorneo implements OperacionesDB {
         Connection cn = null;
         //PreparedStatement stmt = null;
         Statement st = null;
+        ResultSet res;
         Torneo tr = (Torneo) obj;
         String sql = "INSERT INTO `sisfut`.`torneo`(`torNom`,`torFechIni`,`torFechFin`,`torChamp`,`tor2nd`,`tor3rd`,`torEstado`,`torDel`)VALUES('"+tr.getNombreTorneo()+"','"+tr.getFechaInicio()+"','"+tr.getFechaFin()+"','Por Det','Por Det','Por Det','Pendiente',1);"
                , msj ="";
+        int idTor = 0;
         try {
             Class.forName(db.getDriver());
             cn = (Connection) DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
             st = (Statement) cn.createStatement();
-            st.executeUpdate(sql);
-           /* stmt = (PreparedStatement) cn.prepareStatement(sql);
-            stmt.setString(1, tr.getNombreTorneo());
-            stmt.setDate(2, Date.valueOf(tr.getFechaInicio()));
-            stmt.setDate(3, Date.valueOf(tr.getFechaFin()));
-            stmt.setString(4, "TBD");
-            stmt.setString(5, "TBD");
-            stmt.setString(6, "TBD");
-            stmt.setString(7, "Pendiente");
-            stmt.setInt(8, 1);
-            stmt.executeUpdate();*/
+            st.executeUpdate("BEGIN WORK");
+            st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            res = st.getGeneratedKeys();
+            while(res.next()){
+            idTor = res.getInt(1);
+            }
+            for (int i = 0; i < tr.getEquipo().size(); i++) {
+                sql = "INSERT INTO `sisfut`.`compite`(`idTor`,`idEq`)VALUES("+idTor+","+tr.getEquipo().get(i).getIdEq()+");";
+                st.executeUpdate(sql);
+            }
+            st.executeUpdate("COMMIT");
             msj = "Torneo Insertado exitosamente, pendiente de autorización";
         } catch (Exception e) {
+            if (st!=null){
+                try {
+                    st.executeUpdate("ROLLBACK");
+                } catch (Exception l) {
+                }
+            }
         }finally{
             try {
                 if (st != null) {st.close();}
@@ -67,7 +75,25 @@ public class ControlTorneo implements OperacionesDB {
 
     @Override
     public String delete(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Database db =new Database();
+        Connection cn;
+        Statement st;
+        String sql, msj = "";
+        Torneo tr = (Torneo) obj;
+        try {
+            Class.forName(db.getDriver());
+            cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = (Statement) cn.createStatement();
+            sql = "UPDATE torneo set torDel = 0 WHERE idTor = " + tr.getIdTor();
+            st.executeUpdate(sql);
+            msj= "Torneo eliminado exitosamente!";
+            
+        } catch (Exception e) {
+            msj = e.toString();
+        }
+        
+        return msj;
+        
     }
 
     @Override

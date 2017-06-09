@@ -9,9 +9,11 @@ package esquemasypantallas;
 import clases.Torneo;
 import controlador.ControlTorneo;
 import esquemasypantallas.frmInternal.frmInTor;
+import esquemasypantallas.frmInternal.frmModTor;
 import formularios.frmTorneos;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,6 +45,12 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
         jBtnNewTorneo = new javax.swing.JButton();
         jBtnMostrarDet = new javax.swing.JButton();
         jBtnAutorizar = new javax.swing.JButton();
+        jBtnEliminar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jBtnAct = new javax.swing.JButton();
+        jBtnMod = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -51,15 +59,20 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Torneo", "Fecha Inicio", "Fecha Fin", "Estado", "Campeon"
+                "Torneo", "Fecha Inicio", "Fecha Fin", "Estado", "Campeon"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -69,7 +82,6 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jBtnNewTorneo.setText("Crear Nuevo Torneo");
@@ -88,29 +100,98 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
 
         jBtnAutorizar.setText("Autorizar Torneo");
 
+        jBtnEliminar.setText("Eliminar");
+        jBtnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnEliminarMouseClicked(evt);
+            }
+        });
+
+        jTextField1.setText("jTextField1");
+
+        jFormattedTextField1.setText("jFormattedTextField1");
+
+        jBtnAct.setText("Actualizar Tabla");
+        jBtnAct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnActMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(498, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnAct)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(jBtnAct))
+        );
+
+        jBtnMod.setText("Modificar");
+        jBtnMod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnModMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jBtnNewTorneo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnMostrarDet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnAutorizar))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jBtnNewTorneo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnMod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnMostrarDet)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnAutorizar)
+                        .addGap(204, 204, 204))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 9, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNewTorneo)
                     .addComponent(jBtnMostrarDet)
-                    .addComponent(jBtnAutorizar))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(jBtnAutorizar)
+                    .addComponent(jBtnEliminar)
+                    .addComponent(jBtnMod))
+                .addContainerGap())
         );
 
         pack();
@@ -142,31 +223,92 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBtnNewTorneoMouseClicked
 
+    private void jBtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarMouseClicked
+        // TODO add your handling code here:
+        eliminar();
+    }//GEN-LAST:event_jBtnEliminarMouseClicked
+
+    private void jBtnActMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnActMouseClicked
+        // TODO add your handling code here:
+        ControlTorneo ct = new ControlTorneo();
+        tabla(ct.show());
+    }//GEN-LAST:event_jBtnActMouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        
+        int index = this.jTable1.getSelectedRow();
+        Torneo tr = (Torneo) this.jTable1.getValueAt(index,0);
+        if (tr.getTorEstado().equals("Pendiente")) {
+            this.jBtnMod.setText("Modificar");
+        }
+         if (tr.getTorEstado().equals("Curso")){
+        this.jBtnMod.setText("Cambiar Estado");
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jBtnModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnModMouseClicked
+        // TODO add your handling code here:
+        
+        mod();
+    }//GEN-LAST:event_jBtnModMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnAct;
     private javax.swing.JButton jBtnAutorizar;
+    private javax.swing.JButton jBtnEliminar;
+    private javax.swing.JButton jBtnMod;
     private javax.swing.JButton jBtnMostrarDet;
     private javax.swing.JButton jBtnNewTorneo;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     
     public void tabla(ArrayList<Torneo> tr){
-    DefaultTableModel tb = (DefaultTableModel) this.jTable1.getModel();
+         String [] columnas = {"Torneo","Fecha Inicio","Fecha Fin","Estado","Campeon"};
+    DefaultTableModel tb = new DefaultTableModel(null,columnas);
     Object[] obj = new Object[6];
         for (int i = 0; i < tr.size(); i++) {
-            obj[0] = tr.get(i).getIdTor();
-            obj[1] = tr.get(i).getNombreTorneo();
-            obj[2] = tr.get(i).getFechaInicio();
-            obj[3] = tr.get(i).getFechaFin();
-            obj[4] = tr.get(i).getTorEstado();
-            obj[5] = tr.get(i).getCampeon();
+            obj[0] = tr.get(i);
+            obj[1] = tr.get(i).getFechaInicio();
+            obj[2] = tr.get(i).getFechaFin();
+            obj[3] = tr.get(i).getTorEstado();
+            obj[4] = tr.get(i).getCampeon();
             tb.addRow(obj);
         }
         this.jTable1.setModel(tb);
     }
 
 
-
+   public void eliminar(){
+   int index = this.jTable1.getSelectedRow();
+       if (index != -1) {
+           int o = JOptionPane.showConfirmDialog(rootPane, "Esta seguro que desea eliminar este torneo?!","Eliminar Torneo",JOptionPane.YES_NO_OPTION);
+           if (o == 0) {
+               ControlTorneo cr = new ControlTorneo();
+               JOptionPane.showMessageDialog(rootPane, cr.delete(this.jTable1.getValueAt(index, 0)),"Confirmación",JOptionPane.INFORMATION_MESSAGE);
+           }
+           
+       }
+   
+   }
+   
+   public void mod(){
+   
+   int i = this.jTable1.getSelectedRow();
+   
+       if (i != -1) {
+           Torneo tr = (Torneo) this.jTable1.getValueAt(i, 0);
+           frmModTor frm = new frmModTor(tr);
+           JDesktopPane pane = getDesktopPane();
+           pane.add(frm);
+           frm.setVisible(true);
+       }
+   
+   }
 }

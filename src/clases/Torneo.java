@@ -24,7 +24,7 @@ public class Torneo {
     private String Tercero;
     private String Cuarto;
     private String torEstado;
-
+    private ArrayList<Partido> partido = new ArrayList<Partido>();
     private ArrayList<Equipo> equipo = new ArrayList<Equipo>();
 
     public Torneo() {
@@ -60,6 +60,14 @@ public class Torneo {
 
     public void setTercero(String Tercero) {
         this.Tercero = Tercero;
+    }
+
+    public ArrayList<Partido> getPartido() {
+        return partido;
+    }
+
+    public void setPartido(ArrayList<Partido> partido) {
+        this.partido = partido;
     }
 
     public String getCuarto() {
@@ -163,5 +171,10 @@ public class Torneo {
             JOptionPane.showMessageDialog(null, errores,"Los datos de entrada contienen errores de validación",1);
         }
         return bandera;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombreTorneo;
     }
 }

@@ -14,8 +14,13 @@ import javax.swing.JOptionPane;
  * @author Luis
  */
 public class Partido {
-    private String equipoVisita;
-    private String equipoLocal;
+    private int idTor;
+    private int idEqVis;
+    private int idEqLoc;
+    private int idArb;
+    private Arbitro arbitro;
+    private Equipo equipoVisita;
+    private Equipo equipoLocal;
     private String jornada;
     private String hora_inicio;
     private String hora_fin;
@@ -23,12 +28,19 @@ public class Partido {
     private int scoreLocal;
     private int scoreVisita;
     private String ganador;
+    private String estado;
+    
     private ArrayList<Incidencia> incidencias = new ArrayList<Incidencia>();
 
     public Partido() {
     }
 
-    public Partido(String equipoVisita, String equipoLocal, String jornada, String hora_inicio, String hora_fin, String fecha, int scoreLocal, int scoreVisita, String ganador) {
+    public Partido(int idTor, int idEqVis, int idEqLoc, int idArb, Arbitro arbitro, Equipo equipoVisita, Equipo equipoLocal, String jornada, String hora_inicio, String hora_fin, String fecha, int scoreLocal, int scoreVisita, String ganador, String estado) {
+        this.idTor = idTor;
+        this.idEqVis = idEqVis;
+        this.idEqLoc = idEqLoc;
+        this.idArb = idArb;
+        this.arbitro = arbitro;
         this.equipoVisita = equipoVisita;
         this.equipoLocal = equipoLocal;
         this.jornada = jornada;
@@ -38,16 +50,81 @@ public class Partido {
         this.scoreLocal = scoreLocal;
         this.scoreVisita = scoreVisita;
         this.ganador = ganador;
+        this.estado = estado;
     }
 
-    public Partido(String equipoVisita, String equipoLocal, String jornada, String hora_inicio, String hora_fin,String fecha) {
-        this.equipoVisita = equipoVisita;
-        this.equipoLocal = equipoLocal;
-        this.jornada = jornada;
-        this.hora_inicio = hora_inicio;
-        this.hora_fin = hora_fin;
-        this.fecha = fecha;
+    public Partido(String text, String text0, String text1, String text2, String text3, String text4) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public int getIdArb() {
+        return idArb;
+    }
+
+    public void setIdArb(int idArb) {
+        this.idArb = idArb;
+    }
+
+    public Arbitro getArbitro() {
+        return arbitro;
+    }
+
+    public void setArbitro(Arbitro arbitro) {
+        this.arbitro = arbitro;
+    }
+
+    public Equipo getEquipoVisita() {
+        return equipoVisita;
+    }
+
+    public void setEquipoVisita(Equipo equipoVisita) {
+        this.equipoVisita = equipoVisita;
+    }
+
+    public Equipo getEquipoLocal() {
+        return equipoLocal;
+    }
+
+    public void setEquipoLocal(Equipo equipoLocal) {
+        this.equipoLocal = equipoLocal;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+   
+
+    public int getIdTor() {
+        return idTor;
+    }
+
+    public void setIdTor(int idTor) {
+        this.idTor = idTor;
+    }
+
+    public int getIdEqVis() {
+        return idEqVis;
+    }
+
+    public void setIdEqVis(int idEqVis) {
+        this.idEqVis = idEqVis;
+    }
+
+    public int getIdEqLoc() {
+        return idEqLoc;
+    }
+
+    public void setIdEqLoc(int idEqLoc) {
+        this.idEqLoc = idEqLoc;
+    }
+
+
+   
 
     public int getScoreLocal() {
         return scoreLocal;
@@ -81,21 +158,9 @@ public class Partido {
         this.fecha = fecha;
     }
 
-    public String getEquipoVisita() {
-        return equipoVisita;
-    }
 
-    public void setEquipoVisita(String equipoVisita) {
-        this.equipoVisita = equipoVisita;
-    }
 
-    public String getEquipoLocal() {
-        return equipoLocal;
-    }
 
-    public void setEquipoLocal(String equipoLocal) {
-        this.equipoLocal = equipoLocal;
-    }
 
     public String getJornada() {
         return jornada;

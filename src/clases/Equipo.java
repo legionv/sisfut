@@ -31,7 +31,7 @@ public class Equipo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+   
     public Equipo(int idEq, int IdEntrenador, String Entrenador, String email, String Direccion, int numeroTar, String fecha, String telefono, String color, String nombre) {
         this.idEq = idEq;
         this.IdEntrenador = IdEntrenador;
@@ -123,7 +123,8 @@ public class Equipo {
     
     @Override
     public String toString() {
-        return "Equipo{" + ", Entrenador=" + Entrenador + ", E-mail=" + email + ", Direccion=" + Direccion + ", Numero Tarjeta=" + numeroTar + ", Fecha=" + fecha + ", Telefono=" + telefono + ", Color=";
+        return this.nombre;
  }
  
+    
 }
