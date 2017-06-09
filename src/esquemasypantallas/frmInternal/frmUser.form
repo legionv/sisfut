@@ -64,7 +64,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="77" max="32767" attributes="0"/>
+              <EmptySpace pref="74" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -142,7 +142,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fecha Nacimiento(dd/m/aaaa)"/>
+        <Property name="text" type="java.lang.String" value="Fecha Nacimiento(aaaa/mm/dd)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jTxtFechaNac">

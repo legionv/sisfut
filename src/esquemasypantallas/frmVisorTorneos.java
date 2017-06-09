@@ -6,7 +6,13 @@
 
 package esquemasypantallas;
 
+import clases.Torneo;
+import controlador.ControlTorneo;
+import esquemasypantallas.frmInternal.frmInTor;
+import formularios.frmTorneos;
+import java.util.ArrayList;
 import javax.swing.JDesktopPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +25,8 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
      */
     public frmVisorTorneos() {
         initComponents();
+        ControlTorneo ct = new ControlTorneo();
+        tabla(ct.show());
     }
 
     /**
@@ -40,16 +48,14 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Tigers Cup", "25/05/17", "15/06/17", "Proceso", "Pendiente"},
-                {"Lions Cup", "12/02/17", "30/03/17", "Completado", "Boca Juniors"},
-                {"Gold Cup", "01/04/17", "30/04/17", "Pendiente", "Pendiente"}
+
             },
             new String [] {
-                "Torneo", "Fecha Inicio", "Fecha Fin", "Estado", "Campeon"
+                "Codigo", "Torneo", "Fecha Inicio", "Fecha Fin", "Estado", "Campeon"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -63,9 +69,15 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jBtnNewTorneo.setText("Crear Nuevo Torneo");
+        jBtnNewTorneo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnNewTorneoMouseClicked(evt);
+            }
+        });
 
         jBtnMostrarDet.setText("Mostrar Detalles");
         jBtnMostrarDet.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,7 +109,8 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNewTorneo)
                     .addComponent(jBtnMostrarDet)
-                    .addComponent(jBtnAutorizar)))
+                    .addComponent(jBtnAutorizar))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,6 +131,17 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBtnMostrarDetMouseClicked
 
+    private void jBtnNewTorneoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNewTorneoMouseClicked
+        // TODO add your handling code here:
+        frmInTor obj = new frmInTor();
+        JDesktopPane pane = getDesktopPane();
+        pane.add(obj);
+        obj.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_jBtnNewTorneoMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAutorizar;
@@ -126,4 +150,23 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    
+    public void tabla(ArrayList<Torneo> tr){
+    DefaultTableModel tb = (DefaultTableModel) this.jTable1.getModel();
+    Object[] obj = new Object[6];
+        for (int i = 0; i < tr.size(); i++) {
+            obj[0] = tr.get(i).getIdTor();
+            obj[1] = tr.get(i).getNombreTorneo();
+            obj[2] = tr.get(i).getFechaInicio();
+            obj[3] = tr.get(i).getFechaFin();
+            obj[4] = tr.get(i).getTorEstado();
+            obj[5] = tr.get(i).getCampeon();
+            tb.addRow(obj);
+        }
+        this.jTable1.setModel(tb);
+    }
+
+
+
 }

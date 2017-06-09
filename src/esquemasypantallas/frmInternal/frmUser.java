@@ -67,7 +67,7 @@ public class frmUser extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel10.setText("Fecha Nacimiento(dd/m/aaaa)");
+        jLabel10.setText("Fecha Nacimiento(aaaa/mm/dd)");
 
         try {
             jTxtFechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
@@ -182,7 +182,7 @@ public class frmUser extends javax.swing.JInternalFrame {
                                     .addComponent(jTxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jTxtUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTxtPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

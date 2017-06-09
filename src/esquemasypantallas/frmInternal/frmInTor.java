@@ -3,27 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package formularios;
+package esquemasypantallas.frmInternal;
+
 import clases.Equipo;
 import clases.Torneo;
-import java.awt.event.KeyEvent;
+import controlador.ControlTorneo;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Luis
  */
-public class frmTorneos extends javax.swing.JFrame {
+public class frmInTor extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmTorneos
      */
-    public frmTorneos() {
+    public frmInTor() {
         initComponents();
     }
 
@@ -36,49 +39,22 @@ public class frmTorneos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
+        jButnAgregarEquipo = new javax.swing.JButton();
+        jBtnEliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jBtnAgregarTorneo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jcmbEquip = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLocal = new javax.swing.JTable();
         jTxtFechaFin = new javax.swing.JFormattedTextField();
         jTxtFechaInicio = new javax.swing.JFormattedTextField();
         jTxtNombreTorneo = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jButnAgregarEquipo = new javax.swing.JButton();
-        jBtnEliminar = new javax.swing.JButton();
-        jBtnAgregarTorneo = new javax.swing.JButton();
-        jcmbEquip = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Nombre Torneo");
-
-        jLabel2.setText("Fecha Inicio");
-
-        jLabel3.setText("Fecha Fin");
-
-        jTableLocal.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Equipo"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableLocal);
-
-        try {
-            jTxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            jTxtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        setClosable(true);
+        setIconifiable(true);
 
         jLabel4.setText("Equipo");
 
@@ -96,6 +72,8 @@ public class frmTorneos extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Nombre Torneo");
+
         jBtnAgregarTorneo.setText("Agregar Torneo");
         jBtnAgregarTorneo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -103,7 +81,33 @@ public class frmTorneos extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Fecha Inicio");
+
         jcmbEquip.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Real Madrid", "Fútbol Club Barcelona", "Bayern de Múnich", "Juventus de Turín", "Manchester United Football Club", "Chelsea Football Club", "Club Atlético de Madrid", "Arsenal Football Club", "París Saint-Germain Football Club", "Club Atlético River Plate", "Club Atlérico Boca Juniors" }));
+
+        jLabel3.setText("Fecha Fin");
+
+        jTableLocal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Equipo"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableLocal);
+
+        try {
+            jTxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jTxtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,12 +141,11 @@ public class frmTorneos extends javax.swing.JFrame {
                             .addComponent(jTxtFechaInicio, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButnAgregarEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTxtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jBtnEliminar)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButnAgregarEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTxtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jBtnEliminar))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -178,44 +181,62 @@ public class frmTorneos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnAgregarTorneoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarTorneoMouseClicked
-        try {
-            // TODO add your handling code here:
-            llenarTorneo();
-        } catch (ParseException ex) {
-            Logger.getLogger(frmTorneos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnAgregarTorneoMouseClicked
-
     private void jButnAgregarEquipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButnAgregarEquipoMouseClicked
         // TODO add your handling code here:
         if(alreadyInTable(this.jcmbEquip.getSelectedItem().toString(), this.jTableLocal)){
-        agregarTabla(this.jcmbEquip.getSelectedItem().toString(),this.jTableLocal);
+            agregarTabla(this.jcmbEquip.getSelectedItem().toString(),this.jTableLocal);
+            Remover();
         }
     }//GEN-LAST:event_jButnAgregarEquipoMouseClicked
 
     private void jBtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarMouseClicked
         // TODO add your handling code here:
-        
+
         int index = jTableLocal.getSelectedRow();
         eliminarTabla(index,this.jTableLocal);
     }//GEN-LAST:event_jBtnEliminarMouseClicked
 
-    public void llenarTorneo() throws ParseException{
+    private void jBtnAgregarTorneoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarTorneoMouseClicked
+       
+            // TODO add your handling code here:
+            llenarTorneo();
+     
+    }//GEN-LAST:event_jBtnAgregarTorneoMouseClicked
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnAgregarTorneo;
+    private javax.swing.JButton jBtnEliminar;
+    private javax.swing.JButton jButnAgregarEquipo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableLocal;
+    private javax.swing.JFormattedTextField jTxtFechaFin;
+    private javax.swing.JFormattedTextField jTxtFechaInicio;
+    private javax.swing.JTextField jTxtNombreTorneo;
+    private javax.swing.JComboBox<String> jcmbEquip;
+    // End of variables declaration//GEN-END:variables
+ public void llenarTorneo() {
     Torneo obj= new Torneo();
     obj.setNombreTorneo(this.jTxtNombreTorneo.getText());
     obj.setFechaInicio(this.jTxtFechaInicio.getText());
     obj.setFechaFin(this.jTxtFechaFin.getText());
     obj.setEquipo(this.agregarEquipos(jTableLocal));
+    ControlTorneo cr = new ControlTorneo();
+    
     if(obj.getEquipo().size() == 10){
         if(obj.validar()){
            String equipos = this.getEquipos(obj.getEquipo());
             
-    JOptionPane.showMessageDialog(this, "Torneo Agregado Exitosamente"+
+    /*JOptionPane.showMessageDialog(this, "Torneo Agregado Exitosamente"+
               "\n \n Nombre del Torneo :" + obj.getNombreTorneo()+
               "\n Fecha de Inicio del torneo:" + obj.getFechaInicio()+
               "\n Fecha Final del Torneo:"+obj.getFechaFin()+
-            "\n" + equipos,"Torneo",1);
+            "\n" + equipos,"Torneo",1);*/
+    JOptionPane.showMessageDialog(rootPane, cr.insert(obj),"Confirmación",1);
              
     }
     }
@@ -242,60 +263,7 @@ public class frmTorneos extends javax.swing.JFrame {
             model.removeRow(mIndex);
         }
     }
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmTorneos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmTorneos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmTorneos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmTorneos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmTorneos().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnAgregarTorneo;
-    private javax.swing.JButton jBtnEliminar;
-    private javax.swing.JButton jButnAgregarEquipo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableLocal;
-    private javax.swing.JFormattedTextField jTxtFechaFin;
-    private javax.swing.JFormattedTextField jTxtFechaInicio;
-    private javax.swing.JTextField jTxtNombreTorneo;
-    private javax.swing.JComboBox<String> jcmbEquip;
-    // End of variables declaration//GEN-END:variables
-
-  private boolean alreadyInTable(String name, JTable tabla){
+     private boolean alreadyInTable(String name, JTable tabla){
        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
        int c = model.getColumnCount();
        int r = model.getRowCount();
@@ -363,5 +331,32 @@ public class frmTorneos extends javax.swing.JFrame {
        
    
    return mensaje;
+   }
+   public void Anadir(){
+       DefaultComboBoxModel cmb = (DefaultComboBoxModel) this.jcmbEquip.getModel();
+       int i = this.jcmbEquip.getSelectedIndex();
+       cmb.removeElementAt(i);
+       this.jcmbEquip.setModel(cmb);
+   
+   }
+   public void Remover(){
+       if (!this.jcmbEquip.getSelectedItem().toString().equalsIgnoreCase("Seleccionar")) {
+           DefaultComboBoxModel cmb = (DefaultComboBoxModel) this.jcmbEquip.getModel();
+       int i = this.jcmbEquip.getSelectedIndex();
+       cmb.removeElementAt(i);
+       this.jcmbEquip.setModel(cmb);
+       }
+   }
+   
+   public void limpiar(){
+   this.jTableLocal.removeAll();
+   this.jTxtNombreTorneo.setText("");
+   this.jTxtFechaFin.setText("");
+   this.jTxtFechaInicio.setText("");
+   }
+   
+   public void comboEq(ArrayList<Equipo> eqs){
+       
+   
    }
 }
