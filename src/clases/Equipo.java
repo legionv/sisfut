@@ -10,13 +10,14 @@ package clases;
  * @author Madeline
  */
 public class Equipo {
+    private int idEq;
     private int IdEntrenador;
     private String Entrenador;
     private String email ;
     private String Direccion;
     private int numeroTar;
     private String fecha;
-    private int telefono;
+    private String telefono;
     private String color;
     private String nombre;
 
@@ -31,7 +32,8 @@ public class Equipo {
         this.nombre = nombre;
     }
 
-    public Equipo(int IdEntrenador, String Entrenador, String email, String Direccion, int numeroTar, String fecha, int telefono, String color, String nombre) {
+    public Equipo(int idEq, int IdEntrenador, String Entrenador, String email, String Direccion, int numeroTar, String fecha, String telefono, String color, String nombre) {
+        this.idEq = idEq;
         this.IdEntrenador = IdEntrenador;
         this.Entrenador = Entrenador;
         this.email = email;
@@ -42,6 +44,16 @@ public class Equipo {
         this.color = color;
         this.nombre = nombre;
     }
+
+    public int getIdEq() {
+        return idEq;
+    }
+
+    public void setIdEq(int idEq) {
+        this.idEq = idEq;
+    }
+
+ 
 
  
 
@@ -69,7 +81,7 @@ public class Equipo {
         return fecha;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -101,7 +113,7 @@ public class Equipo {
         this.fecha = fecha;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

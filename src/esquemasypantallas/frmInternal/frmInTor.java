@@ -5,8 +5,10 @@
  */
 package esquemasypantallas.frmInternal;
 
+import clases.ComboItem;
 import clases.Equipo;
 import clases.Torneo;
+import controlador.ControlEquipo;
 import controlador.ControlTorneo;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class frmInTor extends javax.swing.JInternalFrame {
      */
     public frmInTor() {
         initComponents();
+        comboEq();
     }
 
     /**
@@ -83,7 +86,7 @@ public class frmInTor extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Fecha Inicio");
 
-        jcmbEquip.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Real Madrid", "Fútbol Club Barcelona", "Bayern de Múnich", "Juventus de Turín", "Manchester United Football Club", "Chelsea Football Club", "Club Atlético de Madrid", "Arsenal Football Club", "París Saint-Germain Football Club", "Club Atlético River Plate", "Club Atlérico Boca Juniors" }));
+        jcmbEquip.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
 
         jLabel3.setText("Fecha Fin");
 
@@ -184,7 +187,10 @@ public class frmInTor extends javax.swing.JInternalFrame {
     private void jButnAgregarEquipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButnAgregarEquipoMouseClicked
         // TODO add your handling code here:
         if(alreadyInTable(this.jcmbEquip.getSelectedItem().toString(), this.jTableLocal)){
-            agregarTabla(this.jcmbEquip.getSelectedItem().toString(),this.jTableLocal);
+            ComboItem item = (ComboItem) this.jcmbEquip.getSelectedItem();
+            //String value = ((ComboItem)item).getValue();
+            agregarTabla(item,this.jTableLocal);
+            
             Remover();
         }
     }//GEN-LAST:event_jButnAgregarEquipoMouseClicked
@@ -247,9 +253,9 @@ public class frmInTor extends javax.swing.JInternalFrame {
     
     }
     
-    private void agregarTabla(String equipo, JTable tabla){
+    private void agregarTabla(ComboItem equipo, JTable tabla){
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
-        String[] vector = new String[1];
+        Object[] vector = new Object[1];
         vector[0] = equipo;
                 
         modelo.addRow(vector);
@@ -335,7 +341,8 @@ public class frmInTor extends javax.swing.JInternalFrame {
    public void Anadir(){
        DefaultComboBoxModel cmb = (DefaultComboBoxModel) this.jcmbEquip.getModel();
        int i = this.jcmbEquip.getSelectedIndex();
-       cmb.removeElementAt(i);
+       ComboItem item = (ComboItem)this.jTableLocal.getValueAt(i, 0);
+       cmb.addElement(item);
        this.jcmbEquip.setModel(cmb);
    
    }
@@ -355,8 +362,15 @@ public class frmInTor extends javax.swing.JInternalFrame {
    this.jTxtFechaInicio.setText("");
    }
    
-   public void comboEq(ArrayList<Equipo> eqs){
-       
+   public void comboEq(){
+       ControlEquipo ce =new ControlEquipo();
+       DefaultComboBoxModel cmb = (DefaultComboBoxModel) this.jcmbEquip.getModel();
+       ArrayList<Equipo> eqs = ce.show();
+       for (int i = 0; i < eqs.size(); i++) {
+           cmb.addElement(new ComboItem(eqs.get(i).getNombre(),String.valueOf(eqs.get(i).getIdEq())));
+      
+       }
+       this.jcmbEquip.setModel(cmb);
    
    }
 }

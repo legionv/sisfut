@@ -152,19 +152,8 @@
     <Component class="javax.swing.JComboBox" name="jcmbEquip">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="12">
+          <StringArray count="1">
             <StringItem index="0" value="Seleccionar"/>
-            <StringItem index="1" value="Real Madrid"/>
-            <StringItem index="2" value="F&#xfa;tbol Club Barcelona"/>
-            <StringItem index="3" value="Bayern de M&#xfa;nich"/>
-            <StringItem index="4" value="Juventus de Tur&#xed;n"/>
-            <StringItem index="5" value="Manchester United Football Club"/>
-            <StringItem index="6" value="Chelsea Football Club"/>
-            <StringItem index="7" value="Club Atl&#xe9;tico de Madrid"/>
-            <StringItem index="8" value="Arsenal Football Club"/>
-            <StringItem index="9" value="Par&#xed;s Saint-Germain Football Club"/>
-            <StringItem index="10" value="Club Atl&#xe9;tico River Plate"/>
-            <StringItem index="11" value="Club Atl&#xe9;rico Boca Juniors"/>
           </StringArray>
         </Property>
       </Properties>
