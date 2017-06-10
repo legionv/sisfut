@@ -6,8 +6,10 @@
 package esquemasypantallas;
 
 import clases.Usuario;
+import clases.Utilidades;
 import connection.Database;
 import controlador.ControlUsuario;
+import esquemasypantallas.frmInternal.frmInTor;
 import esquemasypantallas.frmInternal.frmModUser;
 import esquemasypantallas.frmInternal.frmUser;
 import java.sql.Connection;
@@ -184,11 +186,10 @@ public class frmVisorUsuarios extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          frmUser obj = new frmUser();
-        obj.setVisible(true);
-        JDesktopPane p = getDesktopPane();
-        p.add(obj);
-        obj.setVisible(true);
+      Utilidades util = new Utilidades();
+        JDesktopPane pane = getDesktopPane();
+        frmUser obj = new frmUser();
+        util.openForm(obj, pane);
      
     }//GEN-LAST:event_jButton1ActionPerformed
 

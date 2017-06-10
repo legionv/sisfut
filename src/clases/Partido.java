@@ -57,6 +57,8 @@ public class Partido {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+   
+
     public int getIdArb() {
         return idArb;
     }
@@ -232,4 +234,11 @@ public class Partido {
        
        
    }
+
+    @Override
+    public String toString() {
+        return this.jornada;
+    }
+       
+       
 }

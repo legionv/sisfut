@@ -75,5 +75,41 @@ public class ControlEquipo implements OperacionesDB{
         return lista;
     }
     
+    public Equipo crearEquipo(int idEq){
+    Equipo eq = new Equipo();
     
+    Database db =new Database();
+        Connection cn;
+        Statement st;
+        ResultSet res;
+        String sql;
+        try {
+          Class.forName(db.getDriver());
+            cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = (Statement) cn.createStatement();
+            sql = "select * from equipo where idEq = " + idEq;
+            res = st.executeQuery(sql);
+            while (res.next()) {                
+                eq.setColor(res.getString("eqColor"));
+                eq.setDireccion(res.getString("eqDir"));
+                eq.setEmail(res.getString("eqEmail"));
+                eq.setIdEntrenador(res.getInt("idEnt"));
+                eq.setIdEq(res.getInt("idEq"));
+                eq.setNumeroTar(res.getInt("eqNumTar"));
+                eq.setNombre(res.getString("eqNombre"));
+                eq.setTelefono(res.getString("eqTel"));
+                eq.setFecha(String.valueOf(res.getDate("eqFechaIns")));
+                
+            }
+            res.close();
+            st.close();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return eq;
+    
+        
+    }
 }

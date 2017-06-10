@@ -6,11 +6,12 @@
 
 package esquemasypantallas;
 
-import clases.Torneo;
+import clases.*;
 import controlador.ControlTorneo;
 import esquemasypantallas.frmInternal.frmInTor;
 import esquemasypantallas.frmInternal.frmModTor;
 import formularios.frmTorneos;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -59,6 +60,7 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTxtFechaFin = new javax.swing.JFormattedTextField();
         jBtnAct = new javax.swing.JButton();
+        jBtnApp = new javax.swing.JButton();
         jBtnMod = new javax.swing.JButton();
 
         setClosable(true);
@@ -108,6 +110,11 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
         });
 
         jBtnAutorizar.setText("Autorizar Torneo");
+        jBtnAutorizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAutorizarMouseClicked(evt);
+            }
+        });
 
         jBtnEliminar.setText("Eliminar");
         jBtnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,6 +165,13 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
             }
         });
 
+        jBtnApp.setText("Aplicar");
+        jBtnApp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAppMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,13 +196,19 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTxtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JRbnFin)
-                    .addComponent(JRbnInicio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addComponent(jBtnAct)
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JRbnFin)
+                            .addComponent(JRbnInicio))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                        .addComponent(jBtnAct)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnApp)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +230,9 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jBtnApp))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -218,9 +240,8 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
                                 .addComponent(JRbnInicio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(JRbnFin))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTxtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)))
+                            .addComponent(jTxtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addGap(11, 11, 11))))
         );
 
@@ -284,7 +305,7 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
         int indext= this.jTable1.getSelectedRow();
         int indexm = this.jTable1.convertRowIndexToModel(indext);
         if( indexm != -1){
-      frmDetalleTorneo obj = new frmDetalleTorneo();
+      frmDetalleTorneo obj = new frmDetalleTorneo((Torneo) this.jTable1.getValueAt(indext, 0));
         JDesktopPane pane =getDesktopPane();
         pane.add(obj);
         obj.setVisible(true);
@@ -293,11 +314,11 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnMostrarDetMouseClicked
 
     private void jBtnNewTorneoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNewTorneoMouseClicked
-        // TODO add your handling code here:
-        frmInTor obj = new frmInTor();
+      
+        Utilidades util = new Utilidades();
         JDesktopPane pane = getDesktopPane();
-        pane.add(obj);
-        obj.setVisible(true);
+        frmInTor obj = new frmInTor();
+        util.openForm(obj, pane);
         
         
         
@@ -338,12 +359,23 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
         filtrarNom();
     }//GEN-LAST:event_jTxtFiltro1KeyTyped
 
+    private void jBtnAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAppMouseClicked
+        // TODO add your handling code here:
+        filtrarNom();
+    }//GEN-LAST:event_jBtnAppMouseClicked
+
+    private void jBtnAutorizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAutorizarMouseClicked
+      
+        autorizar();
+    }//GEN-LAST:event_jBtnAutorizarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton JRbnFin;
     private javax.swing.JRadioButton JRbnInicio;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBtnAct;
+    private javax.swing.JButton jBtnApp;
     private javax.swing.JButton jBtnAutorizar;
     private javax.swing.JButton jBtnEliminar;
     private javax.swing.JButton jBtnMod;
@@ -381,12 +413,15 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
 
    public void eliminar(){
    int index = this.jTable1.getSelectedRow();
+
        if (index != -1) {
-           int o = JOptionPane.showConfirmDialog(rootPane, "Esta seguro que desea eliminar este torneo?!","Eliminar Torneo",JOptionPane.YES_NO_OPTION);
+           
+                int o = JOptionPane.showConfirmDialog(rootPane, "Esta seguro que desea eliminar este torneo?!","Eliminar Torneo",JOptionPane.YES_NO_OPTION);
            if (o == 0) {
                ControlTorneo cr = new ControlTorneo();
                JOptionPane.showMessageDialog(rootPane, cr.delete(this.jTable1.getValueAt(index, 0)),"Confirmación",JOptionPane.INFORMATION_MESSAGE);
            }
+           
            
        }
    
@@ -395,13 +430,17 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
    public void mod(){
    
    int i = this.jTable1.getSelectedRow();
-   
+      
        if (i != -1) {
+           
+           
            Torneo tr = (Torneo) this.jTable1.getValueAt(i, 0);
+           if (tr.getTorEstado().equals("Pendiente")) {
            frmModTor frm = new frmModTor(tr);
            JDesktopPane pane = getDesktopPane();
            pane.add(frm);
            frm.setVisible(true);
+           }
        }
    
    }
@@ -409,6 +448,34 @@ public class frmVisorTorneos extends javax.swing.JInternalFrame {
    public void filtrarNom(){
    
        ControlTorneo ct = new ControlTorneo();
-       tabla(ct.filtrar(this.jTxtFiltro1.getText()));
+       String combo = "";
+       if (this.JRbnInicio.isSelected()) {
+           combo ="torFechIni";
+       }else{
+       combo ="torFechFin";
+       }
+       tabla(ct.filtrar(this.jTxtFiltro1.getText(),combo,this.jTxtFechaInicio.getText(),this.jTxtFechaFin.getText()));
+   }
+   
+   public void autorizar(){
+     int index = this.jTable1.getSelectedRow();
+     Torneo tr = (Torneo) this.jTable1.getValueAt(index, 0);
+        if (index != -1) {
+            
+            if (tr.getTorEstado().equals("Pendiente")) {
+                         ControlTorneo ct = new ControlTorneo();
+        int o = JOptionPane.showConfirmDialog(rootPane, "Desea autorizar este torneo?(se generarán los partidos de la primera jornada)","Autorixar Torneo",JOptionPane.YES_NO_OPTION);
+       
+   
+        if (o== 0) {
+            String autorizarTorneo = ct.autorizarTorneo((Torneo) this.jTable1.getValueAt(index, 0));
+        JOptionPane.showMessageDialog(rootPane, autorizarTorneo);
+        } 
+            }else{
+            JOptionPane.showMessageDialog(rootPane, "Solo puede autorizarse torneos en estado 'Pendiente'","Advertencia!",JOptionPane.WARNING_MESSAGE);
+            }
+     
+        }
+     
    }
 }

@@ -8,6 +8,7 @@ package controlador;
 import clases.Equipo;
 import clases.Torneo;
 import clases.Usuario;
+import clases.Utilidades;
 import connection.Database;
 import java.sql.*;
 import java.util.ArrayList;
@@ -196,7 +197,7 @@ public class ControlTorneo implements OperacionesDB {
         
     }
         
-     public ArrayList filtrar(String filtro){
+     public ArrayList filtrar(String filtro,String radio,String fecha1,String fecha2){
     Database db =new Database();
         Connection cn;
         Statement st;
@@ -208,6 +209,12 @@ public class ControlTorneo implements OperacionesDB {
             cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
             st = (Statement) cn.createStatement();
             sql= "select * from torneo where (torNom like '%"+filtro+"%' or torChamp like '%"+filtro+"%' or torEstado like '%"+filtro+"%') and torDel = 1";
+            final String regex = "^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$";
+            if (fecha1.matches(regex)  && fecha2.matches(regex)) {
+                sql += "  and ("+radio+" between '"+fecha1+"' and '"+fecha2+"')";
+                
+            }
+            
             res = st.executeQuery(sql);
             while (res.next()) {
                 lista.add(new Torneo(
@@ -237,5 +244,43 @@ public class ControlTorneo implements OperacionesDB {
     
     }
     
+    public String autorizarTorneo(Torneo tr){
+    String msj = "";
+    Database db = new Database();
+    Connection cn = null;
+    Statement st = null;
+    String sql = "";
+    Utilidades util = new Utilidades();
+        try {
+            Class.forName(db.getDriver());
+            cn = (Connection) DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st= (Statement) cn.createStatement();
+            st.executeUpdate("BEGIN WORK");
+            sql= "UPDATE torneo set torEstado = 'Primera' WHERE idTor = " + tr.getIdTor();
+            st.executeUpdate(sql);
+            
+            String[] sqlPartidos =util.Emparejar(tr);
+            for (int i = 0; i < sqlPartidos.length; i++) {
+                st.executeUpdate(sqlPartidos[i]);
+            }
+            
+            
+            msj="Torneo Autorizado Exitosamente!\nPartidos de primera jornada generados exitosamente!";
+            st.executeUpdate("COMMIT");
+            st.close();
+            cn.close();
+            
+        } catch (Exception e) {
+            msj = e.toString();
+            if (st!=null){
+                try {
+                    st.executeUpdate("ROLLBACK");
+                } catch (Exception l) {
+                }
+            }
+        }
     
+    
+    return msj;
+    }
 }
