@@ -30,6 +30,8 @@ public class frmModTor extends javax.swing.JInternalFrame {
      */
     public frmModTor(Torneo tr) {
         initComponents();
+        this.tr = tr;
+        reset();
         comboEq();
     }
 
@@ -77,7 +79,7 @@ public class frmModTor extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nombre Torneo");
 
-        jBtnAgregarTorneo.setText("Agregar Torneo");
+        jBtnAgregarTorneo.setText("Guardar");
         jBtnAgregarTorneo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBtnAgregarTorneoMouseClicked(evt);
@@ -101,13 +103,13 @@ public class frmModTor extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTableLocal);
 
         try {
-            jTxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+            jTxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            jTxtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+            jTxtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -208,8 +210,12 @@ public class frmModTor extends javax.swing.JInternalFrame {
     private void jBtnAgregarTorneoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarTorneoMouseClicked
        
             // TODO add your handling code here:
-            llenarTorneo();
-            limpiar();
+            int o = JOptionPane.showConfirmDialog(rootPane, "Esta seguro que desea modificar este torneo?!","Modificar Torneo",JOptionPane.YES_NO_OPTION);
+            if (o == 0) {
+                llenarTorneo();
+            
+        }
+            
     }//GEN-LAST:event_jBtnAgregarTorneoMouseClicked
 
 
@@ -234,6 +240,7 @@ public class frmModTor extends javax.swing.JInternalFrame {
     obj.setFechaInicio(this.jTxtFechaInicio.getText());
     obj.setFechaFin(this.jTxtFechaFin.getText());
     obj.setEquipo(this.agregarEquipos(jTableLocal));
+    obj.setIdTor(this.tr.getIdTor());
     ControlTorneo cr = new ControlTorneo();
     
     if(obj.getEquipo().size() == 10){
@@ -245,8 +252,8 @@ public class frmModTor extends javax.swing.JInternalFrame {
               "\n Fecha de Inicio del torneo:" + obj.getFechaInicio()+
               "\n Fecha Final del Torneo:"+obj.getFechaFin()+
             "\n" + equipos,"Torneo",1);*/
-    JOptionPane.showMessageDialog(rootPane, cr.insert(obj),"Confirmación",1);
-             
+    JOptionPane.showMessageDialog(rootPane, cr.update(obj),"Confirmación",1);
+             limpiar();
     }
     }
     
@@ -366,11 +373,50 @@ for (int i = rowCount - 1; i >= 0; i--) {
        ControlEquipo ce =new ControlEquipo();
        DefaultComboBoxModel cmb = (DefaultComboBoxModel) this.jcmbEquip.getModel();
        ArrayList<Equipo> eqs = ce.show();
+       int[] c = new int[eqs.size()];
        for (int i = 0; i < eqs.size(); i++) {
-           cmb.addElement(eqs.get(i));
+           
+           for (int j = 0; j < this.tr.getEquipo().size(); j++) {
+               if (this.tr.getEquipo().get(j).toString().equals(eqs.get(i).toString())) {
+                   
+                  c[i]++; 
+               }
+               
+           }
+           if (c[i] == 0) {
+               cmb.addElement(eqs.get(i));
+           }
+           /*if (eqs.get(i).toString().equalsIgnoreCase(this.tr.getEquipo().get(i).toString())) {
+               cmb.addElement(eqs.get(i));
+           }*/
+           
+           
       
        }
        this.jcmbEquip.setModel(cmb);
    
    }
+   
+   public void reset(){
+   
+       this.jTxtNombreTorneo.setText(this.tr.getNombreTorneo());
+       this.jTxtFechaInicio.setText(this.tr.getFechaInicio());
+       this.jTxtFechaFin.setText(this.tr.getFechaFin());
+       DefaultTableModel tb = (DefaultTableModel) this.jTableLocal.getModel();
+       int rowCount = tb.getRowCount();
+//Remove rows one by one from the end of the table
+for (int i = rowCount - 1; i >= 0; i--) {
+    tb.removeRow(i);
+}
+
+  Object[] obj = new Object[1];
+       for (int i = 0; i < this.tr.getEquipo().size(); i++) {
+           obj[0] = this.tr.getEquipo().get(i);
+           
+           tb.addRow(obj);
+       }
+       this.jTableLocal.setModel(tb);
+   }
+   
+   private Torneo tr;
 }

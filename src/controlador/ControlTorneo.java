@@ -5,11 +5,13 @@
  */
 package controlador;
 
+import clases.Equipo;
 import clases.Torneo;
 import clases.Usuario;
 import connection.Database;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -70,7 +72,49 @@ public class ControlTorneo implements OperacionesDB {
 
     @Override
     public String update(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Database db =new Database();
+        Connection cn;
+        Statement st = null;
+        String sql, msj = "";
+        Torneo tr = (Torneo) obj;
+         try {
+            Class.forName(db.getDriver());
+            cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = (Statement) cn.createStatement();
+            st.executeUpdate("BEGIN WORK");
+            sql = "UPDATE `sisfut`.`torneo`\n" +
+"SET\n" +
+"`torNom` = '"+tr.getNombreTorneo()+"',\n" +
+"`torFechIni` = '"+tr.getFechaInicio()+"',\n" +
+"`torFechFin` = '"+tr.getFechaFin()+"',\n" +
+"`torChamp` = 'Por Det',\n" +
+"`tor2nd` = 'Por Det',\n" +
+"`tor3rd` = 'Por Det',\n" +
+"`torEstado` = 'Pendiente',\n" +
+"`tor4th` = 'Por Det'\n" +
+"WHERE `idTor` = "+tr.getIdTor()+";";
+            st.executeUpdate(sql);
+            sql= "DELETE from compite where idTor = " + tr.getIdTor();
+            st.executeUpdate(sql);
+            for (int i = 0; i < tr.getEquipo().size(); i++) {
+                sql = "INSERT INTO `sisfut`.`compite`(`idTor`,`idEq`)VALUES("+tr.getIdTor()+","+tr.getEquipo().get(i).getIdEq()+");";
+                st.executeUpdate(sql);
+            }
+            msj= "Torneo actualizado exitosamente!";
+            st.executeUpdate("COMMIT");
+            st.close();
+            cn.close();
+        } catch (Exception e) {
+            msj = e.toString();
+            if (st!=null){
+                try {
+                    st.executeUpdate("ROLLBACK");
+                } catch (Exception l) {
+                }
+            }
+        }
+        
+        return msj;
     }
 
     @Override
@@ -103,7 +147,7 @@ public class ControlTorneo implements OperacionesDB {
         Statement st;
         ResultSet res;
         String sql;
-        ArrayList lista= new ArrayList();
+        ArrayList<Torneo> lista= new ArrayList<Torneo>();
         try {
             Class.forName(db.getDriver());
             cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
@@ -124,7 +168,23 @@ public class ControlTorneo implements OperacionesDB {
                 
                 
             }
-          
+             for (int i = 0; i < lista.size(); i++) {
+                sql = "select * from compite c inner join equipo e on e.idEq = c.idEq where c.idTor = " + lista.get(i).getIdTor();
+                res = st.executeQuery(sql);
+                while(res.next()){
+                lista.get(i).agregarEquipo(new Equipo(res.getInt("idEq"), 
+                res.getInt("idEnt"), 
+                        null, 
+                        res.getString("eqEmail"), 
+                                res.getString("eqDir"), 
+                                res.getInt("eqNumTar"), 
+                                        String.valueOf(res.getDate("eqFechaIns")), 
+                                        res.getString("eqTel"), 
+                                                res.getString("eqColor")
+                                                ,res.getString("eqNombre")
+                                                        ));
+                }
+            }
             res.close();
             st.close();
             cn.close();

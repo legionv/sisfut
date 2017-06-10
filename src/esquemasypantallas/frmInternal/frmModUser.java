@@ -53,6 +53,7 @@ public class frmModUser extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jTxtTel = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
+        jBtnReset = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -130,6 +131,13 @@ public class frmModUser extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Teléfono");
 
+        jBtnReset.setText("Reset");
+        jBtnReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnResetMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,7 +145,7 @@ public class frmModUser extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,8 +156,7 @@ public class frmModUser extends javax.swing.JInternalFrame {
                             .addComponent(jTxtTel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtDui, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -165,11 +172,13 @@ public class frmModUser extends javax.swing.JInternalFrame {
                                     .addComponent(jTxtNombre, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTxtPass2))
                                 .addComponent(jTxtUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTxtPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(77, Short.MAX_VALUE))))
+                            .addComponent(jTxtPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(77, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(116, 116, 116)
                 .addComponent(jBtnAgregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnReset)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -212,7 +221,9 @@ public class frmModUser extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10)
                     .addComponent(jTxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnAgregar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnAgregar)
+                    .addComponent(jBtnReset))
                 .addGap(45, 45, 45))
         );
 
@@ -301,6 +312,11 @@ public class frmModUser extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTxtApellidoKeyTyped
 
+    private void jBtnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnResetMouseClicked
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_jBtnResetMouseClicked
+
 private Usuario asignar(Usuario user){
      user.setFechaNac(jTxtFechaNac.getText());
         user.setEmail(jTxtEmail.getText());
@@ -329,6 +345,7 @@ private void reset(){
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAgregar;
+    private javax.swing.JButton jBtnReset;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

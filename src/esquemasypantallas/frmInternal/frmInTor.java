@@ -209,7 +209,7 @@ public class frmInTor extends javax.swing.JInternalFrame {
        
             // TODO add your handling code here:
             llenarTorneo();
-            limpiar();
+            
     }//GEN-LAST:event_jBtnAgregarTorneoMouseClicked
 
 
@@ -246,7 +246,7 @@ public class frmInTor extends javax.swing.JInternalFrame {
               "\n Fecha Final del Torneo:"+obj.getFechaFin()+
             "\n" + equipos,"Torneo",1);*/
     JOptionPane.showMessageDialog(rootPane, cr.insert(obj),"Confirmación",1);
-             
+             limpiar();
     }
     }
     
