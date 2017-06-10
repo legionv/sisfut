@@ -196,6 +196,46 @@ public class ControlTorneo implements OperacionesDB {
         
     }
         
+     public ArrayList filtrar(String filtro){
+    Database db =new Database();
+        Connection cn;
+        Statement st;
+        ResultSet res;
+        String sql;
+        ArrayList lista= new ArrayList();
+        try {
+            Class.forName(db.getDriver());
+            cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = (Statement) cn.createStatement();
+            sql= "select * from torneo where (torNom like '%"+filtro+"%' or torChamp like '%"+filtro+"%' or torEstado like '%"+filtro+"%') and torDel = 1";
+            res = st.executeQuery(sql);
+            while (res.next()) {
+                lista.add(new Torneo(
+                        res.getInt("idTor")
+                        ,res.getString("torNom"),
+                        String.valueOf(res.getDate("torFechIni")), 
+                        String.valueOf(res.getDate("torFechFin")),
+                        res.getString("torChamp"), 
+                        res.getString("tor2nd"), 
+                        res.getString("tor3rd"),
+                        res.getString("tor4th"), 
+                        res.getString("torEstado")));
+                
+                
+            }
+          
+            res.close();
+            st.close();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return lista;
+        
+        
+    
+    }
     
     
 }

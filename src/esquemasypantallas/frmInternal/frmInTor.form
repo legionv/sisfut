@@ -190,18 +190,21 @@
     <Component class="javax.swing.JFormattedTextField" name="jTxtFechaFin">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="####/##/##" subtype="-1" type="5"/>
+          <Format format="####-##-##" subtype="-1" type="5"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jTxtFechaInicio">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="####/##/##" subtype="-1" type="5"/>
+          <Format format="####-##-##" subtype="-1" type="5"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtNombreTorneo">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTxtNombreTorneoKeyTyped"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

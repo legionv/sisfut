@@ -240,32 +240,11 @@ public class frmUser extends javax.swing.JInternalFrame {
     private void jBtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarMouseClicked
         // TODO add your handling code here:
 
-        Usuario user = null;
-        String nivel = jCmbNivel.getSelectedItem().toString();
-
-        switch(nivel){
-
-            case "Administrador":
-            user = new Usuario();
-
-            break;
-            case "Entrenador":
-            user = new Entrenador();
-            break;
-            case "Arbitro":
-            user = new Arbitro();
-            break;
-            case "Regular":
-            user = new Administrativo();
-            break;
-            default:
-
-            break;
-
-        }
+        Usuario user = new Usuario();
+   
         try {
 
-            asignar(user);
+            user = (Usuario)asignar(user);
             if(user.validar(jTxtPass2.getText())){
                 /*String mensaje = "Datos ingresados: \n"+ "Usuario: " + user.getUsuario()+
                 "\nContraseña: "+ user.getContra()+
@@ -286,7 +265,7 @@ public class frmUser extends javax.swing.JInternalFrame {
                
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Seleccione un nivel de usuario", "Resultado",1);
+            JOptionPane.showMessageDialog(this, e.toString(), "Resultado",0);
         }
 
     }//GEN-LAST:event_jBtnAgregarMouseClicked

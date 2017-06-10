@@ -8,6 +8,7 @@ package esquemasypantallas.frmInternal;
 import clases.ComboItem;
 import clases.Equipo;
 import clases.Torneo;
+import clases.Utilidades;
 import controlador.ControlEquipo;
 import controlador.ControlTorneo;
 import java.text.ParseException;
@@ -101,16 +102,22 @@ public class frmInTor extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTableLocal);
 
         try {
-            jTxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+            jTxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            jTxtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+            jTxtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+
+        jTxtNombreTorneo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtNombreTorneoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -211,6 +218,12 @@ public class frmInTor extends javax.swing.JInternalFrame {
             llenarTorneo();
             
     }//GEN-LAST:event_jBtnAgregarTorneoMouseClicked
+
+    private void jTxtNombreTorneoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombreTorneoKeyTyped
+        // TODO add your handling code here:
+        Utilidades util = new Utilidades();
+        util.noSpecialNums(evt);
+    }//GEN-LAST:event_jTxtNombreTorneoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

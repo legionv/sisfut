@@ -22,7 +22,17 @@ public class Utilidades {
         }
     
     }
+      public void noSpecialNums(java.awt.event.KeyEvent evt){
+    Character c = evt.getKeyChar();
+    String a = c.toString();
+    String pattern = "^[a-zA-Z0-9\\s]*$";
+        if (!a.matches(pattern)) {
+            
+            evt.consume();
+        }
+        
     
+    }
     public String fixNombre(String nom){
     String nombre= "";
          if (nom.length() > 0) {

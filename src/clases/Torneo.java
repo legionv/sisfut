@@ -8,6 +8,8 @@ package clases;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -148,8 +150,15 @@ public class Torneo {
         errores += corre +". El formato en el que ingreso la fecha es inválido\n";
         corre++;
         }
+      
+        
         if(this.nombreTorneo.equals("")){
             errores += corre + ". El campo de nombre está vacio \n";
+            corre++;
+         bandera=false;
+        }
+                if(this.nombreTorneo.length() > 20){
+     errores += corre + ". El campo de nombre no puede tener mas de 20 caracteres \n";
             corre++;
          bandera=false;
         }
@@ -157,15 +166,18 @@ public class Torneo {
         errores += corre + ". El campo de fecha está vacio \n";
             corre++;
          bandera=false;
+        }else{
+          SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            if (!sdf.parse(this.fechaInicio).before(sdf.parse(this.fechaFin))) {
+                errores += "La fecha de inicio no puede ser despues de la fecha de fin";
+                bandera= false;
+            }
+        } catch (ParseException ex) {
+            
         }
-       
-           // SimpleDateFormat sdf = new SimpleDateFormat("aaaa/mm/dd");
-        /*if(sdf.parse(this.fechaInicio).before(sdf.parse(this.fechaFin))){
-        errores += corre + ". La fecha fin no puede ser antes que la fecha inicio \n";
-            corre++;
-         bandera=false;
-        }*/
-     
+        }
+  
         
          if(!bandera){
             JOptionPane.showMessageDialog(null, errores,"Los datos de entrada contienen errores de validación",1);

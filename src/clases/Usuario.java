@@ -142,6 +142,11 @@ public class Usuario {
             corre++;
         bandera = false;
         }
+          if (this.nivel.equals("Seleccionar")) {
+            errores += corre + ". Debe elegir un nivel de usuario\n";
+            corre++;
+            bandera=false;  
+          }
         if(!this.contra.equals(pass2)){
             errores += corre + ". La contraseña no coincide con el campo repetir contraseña \n";
             corre++;
