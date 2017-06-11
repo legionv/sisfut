@@ -11,6 +11,7 @@ package clases;
  */
 public class Incidencia {
     private int idPart;
+    private int idInc;
     private Partido part;
     private int idJug;
     private Jugador jugador;
@@ -19,6 +20,26 @@ public class Incidencia {
     private String tipo;
     private String equipo;
     public Incidencia() {
+    }
+
+    public int getIdInc() {
+        return idInc;
+    }
+
+    public void setIdInc(int idInc) {
+        this.idInc = idInc;
+    }
+
+    public Incidencia(int idPart, int idInc, Partido part, int idJug, Jugador jugador, String minuto, String tiempo, String tipo, String equipo) {
+        this.idPart = idPart;
+        this.idInc = idInc;
+        this.part = part;
+        this.idJug = idJug;
+        this.jugador = jugador;
+        this.minuto = minuto;
+        this.tiempo = tiempo;
+        this.tipo = tipo;
+        this.equipo = equipo;
     }
 
     public Incidencia(int idPart, Partido part, int idJug, Jugador jugador, String minuto, String tiempo, String tipo, String equipo) {
@@ -98,6 +119,11 @@ public class Incidencia {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return this.tipo;
     }
     
     

@@ -29,12 +29,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="jBtnNew" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBtnAgre" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="jBtnMod" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBtnElim" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -50,11 +46,9 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBtnNew" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnAgre" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnMod" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnElim" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,25 +56,12 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jBtnNew">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nuevo"/>
+        <Property name="text" type="java.lang.String" value="Reset"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jBtnAgre">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Agregar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnAgreMouseClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnMod">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jBtnElim">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">

@@ -25,17 +25,21 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
      */
     public frmDetalleTorneo(Torneo tr) {
         initComponents();
-        this.tr = tr;
-        jTxtTorneo.setText(this.tr.getNombreTorneo());
         ControlPartido cp = new ControlPartido();
+        loadData(cp.show(tr));
+        this.tr = tr;
+        this.tr.setPartido(cp.show(tr));
+        jTxtTorneo.setText(this.tr.getNombreTorneo());
+        
         jTxtEsta.setText(this.tr.getTorEstado());
+        
         jTxtFechIn.setText(this.tr.getFechaInicio());
         jTxtFechEnd.setText(this.tr.getFechaFin());
         jTxtLugar3.setText(this.tr.getTercero());
         jTxtLug2.setText(this.tr.getSugundo());
         jTxtCam.setText(this.tr.getCampeon());
         jTxtcuarto.setText(this.tr.getCuarto());
-        loadData(cp.show(tr));
+        
     }
 
     /**

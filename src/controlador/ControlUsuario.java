@@ -6,6 +6,7 @@
 package controlador;
 
 import clases.Arbitro;
+import clases.Entrenador;
 import clases.Usuario;
 import connection.Database;
 import esquemasypantallas.frmMenu;
@@ -341,5 +342,47 @@ public class ControlUsuario implements OperacionesDB{
         }
        
        return user;
+    }
+     
+     public ArrayList<Entrenador> getEntrenadores(){
+    
+    Database db =new Database();
+        Connection cn;
+        Statement st;
+        ResultSet res;
+        String sql;
+        ArrayList lista= new ArrayList();
+        try {
+            Class.forName(db.getDriver());
+            cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = (Statement) cn.createStatement();
+            sql= "select * from usuarios u inner join entrenador e on u.idUser= e.idUser where userDel != 0";
+            res = st.executeQuery(sql);
+            while (res.next()) {
+                lista.add(new Entrenador(res.getInt("idEnt"),
+                        res.getInt("idUser"), 
+                        res.getString("userName"), 
+                        res.getString("userPass"),
+                        res.getString("userNombre"),
+                        res.getString("userApellido"), 
+                        res.getString("userLevel"), 
+                        res.getString("userDui"),
+                        res.getString("userEmail"), 
+                        res.getString("userTel"), 
+                        res.getString("userFnac")
+                        
+                ));
+                
+                
+            }
+          
+            res.close();
+            st.close();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return lista;
     }
 }

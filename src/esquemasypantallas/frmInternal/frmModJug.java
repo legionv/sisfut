@@ -19,6 +19,7 @@ public class frmModJug extends javax.swing.JInternalFrame {
      */
     public frmModJug(Jugador jug) {
         initComponents();
+        this.jTxtNombre.setText(jug.getNombre());
     }
 
     /**
@@ -31,9 +32,7 @@ public class frmModJug extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jBtnNew = new javax.swing.JButton();
-        jBtnAgre = new javax.swing.JButton();
         jBtnMod = new javax.swing.JButton();
-        jBtnElim = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -55,18 +54,9 @@ public class frmModJug extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
 
-        jBtnNew.setText("Nuevo");
-
-        jBtnAgre.setText("Agregar");
-        jBtnAgre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBtnAgreMouseClicked(evt);
-            }
-        });
+        jBtnNew.setText("Reset");
 
         jBtnMod.setText("Modificar");
-
-        jBtnElim.setText("Eliminar");
 
         jLabel1.setText("Nombre");
 
@@ -201,12 +191,8 @@ public class frmModJug extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jBtnNew)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnAgre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnMod)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnElim))
+                        .addGap(87, 87, 87)
+                        .addComponent(jBtnMod))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
@@ -218,20 +204,12 @@ public class frmModJug extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNew)
-                    .addComponent(jBtnAgre)
-                    .addComponent(jBtnMod)
-                    .addComponent(jBtnElim))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(jBtnMod))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBtnAgreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgreMouseClicked
-        // TODO add your handling code here:
-        llenar();
-
-    }//GEN-LAST:event_jBtnAgreMouseClicked
 
     private void jTxtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtNombreKeyTyped
         // TODO add your handling code here:
@@ -265,8 +243,6 @@ private void llenar(){
 
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnAgre;
-    private javax.swing.JButton jBtnElim;
     private javax.swing.JButton jBtnMod;
     private javax.swing.JButton jBtnNew;
     private javax.swing.JLabel jLabel1;

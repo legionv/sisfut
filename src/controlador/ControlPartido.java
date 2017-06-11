@@ -7,9 +7,11 @@ package controlador;
 
 import clases.Arbitro;
 import clases.Equipo;
+import clases.Incidencia;
 import clases.Partido;
 import clases.Torneo;
 import connection.Database;
+import esquemasypantallas.frmInternal.frmModPart;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -65,7 +67,101 @@ public class ControlPartido implements OperacionesDB{
 
     @Override
     public String update(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Database db = new Database();
+        Connection cn = null;
+        Incidencia in = new Incidencia();
+        ControlIncidencia ci = new ControlIncidencia();
+        Partido par = (Partido) obj;
+        ResultSet res = null;
+        Statement st = null;
+        String sql = "", msj = "";
+        int idInc = 0;
+        try {
+            Class.forName(db.getDriver());
+            cn = (Connection) DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = (Statement) cn.createStatement();
+            sql= "UPDATE `sisfut`.`partido`\n" +
+"SET\n" +
+"`idArb` = "+par.getIdArb()+",\n" +
+"`idEqVis` = "+par.getIdEqVis()+",\n" +
+"`idEqLoc` = "+par.getIdEqLoc()+",\n" +
+"`partFecha` = '"+par.getFecha()+"',\n" +
+"`partHora` = '"+par.getHora_inicio()+"',\n" +
+"`partFin` = '"+par.getHora_fin()+"',\n" +
+"`partGanador` = '"+par.getGanador()+"',\n" +
+"`partScoreLoc` = "+par.getScoreLocal()+",\n" +
+"`partScoreVis` = "+par.getScoreVisita()+",\n" +
+"`partEstado` = '"+par.getEstado()+"',\n" +
+"`partJornada` = '"+par.getJornada()+"'\n" +
+" WHERE `idPart` = "+par.getIdPart()+";";
+            
+            st.executeUpdate("BEGIN WORK");
+            st.executeUpdate(sql);
+            
+            
+            for (int i = 0; i < par.getIncidencias().size(); i++) {
+               
+               in = par.getIncidencias().get(i);
+               
+               sql = "INSERT INTO `sisfut`.`incidencia`\n" +
+"(`idPart`,\n" +
+"`idJug`,\n" +
+"`minuto`,\n" +
+"`tiempo`,`Eq`)\n" +
+"VALUES\n" +
+"("+par.getIdPart()+",\n" +
+""+in.getIdJug()+",\n" +
+"'"+in.getMinuto()+"',\n" +
+"'"+in.getTiempo()+"','"+in.getEquipo()+"');";
+               
+                st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            res = st.getGeneratedKeys();
+             res = st.getGeneratedKeys();
+            while(res.next()){
+            idInc = res.getInt(1);
+            }
+            if (in.getTipo().toLowerCase().contains("gol")) {
+                
+                sql = "INSERT INTO `sisfut`.`gol`\n" +
+"(\n" +
+"`idInc`,\n" +
+"`tipo`)\n" +
+"VALUES\n" +
+"(\n" +
+""+idInc+",\n" +
+"'"+in.getTipo()+"');";
+                 
+            }else if (in.getTipo().toLowerCase().contains("tarjeta")) {
+                sql = "INSERT INTO `sisfut`.`tarjeta`(`idInc`,`color`)VALUES("+idInc+",'"+in.getTipo()+"');";
+                
+            }else{
+            sql = "INSERT INTO `sisfut`.`tiros`(`idInc`,`tipo`)VALUES("+idInc+",'"+in.getTipo()+"');";
+            
+            }
+            
+            st.executeUpdate(sql);
+                
+            }
+            st.executeUpdate("COMMIT");
+            msj = "Partido modificado exitosamente!";
+            res.close();
+            st.close();
+            cn.close();
+        } catch (Exception e) {
+            msj = e.toString();
+            System.out.println(e.getStackTrace()[0].getLineNumber());
+              if (st!=null){
+                try {
+                    st.executeUpdate("ROLLBACK");
+                } catch (Exception l) {
+                }
+            }
+        }
+        
+        
+        
+        
+        return msj;
     }
 
     @Override

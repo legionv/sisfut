@@ -10,9 +10,10 @@ import clases.Incidencia;
 import clases.Jugador;
 import clases.Partido;
 import clases.Utilidades;
+import controlador.ControlIncidencia;
 import controlador.ControlJugador;
+import controlador.ControlPartido;
 import controlador.ControlUsuario;
-import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +22,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,14 +37,19 @@ public class frmModPart extends javax.swing.JInternalFrame {
     public frmModPart(Partido part) {
         initComponents();
         this.part = part;
+        ControlIncidencia ci = new ControlIncidencia();
+        this.part.setIncidencias(ci.getIncidencias(this.part));
+       
         combo();
         ControlUsuario cu = new ControlUsuario();
         Utilidades util = new Utilidades();
         this.jTxtELocal.setText(part.getEquipoLocal().toString());
         this.jTxtEVisita.setText(part.getEquipoVisita().toString());
         this.jTxtFecha.setText(part.getFecha());
+        this.jTxtHoraFin.setText(part.getHora_fin());
         this.jTxtHoraInicio.setText(part.getHora_inicio());
         util.loadCombo(cu.getArbitros(), this.jCmbArbitro);
+        loadTables();
     }
 
     /**
@@ -702,19 +707,29 @@ public class frmModPart extends javax.swing.JInternalFrame {
          Object arb = this.jCmbArbitro.getSelectedItem();
         int idArb = ((Arbitro)arb).getIdArb();
        p.setIdArb(idArb);
-     
+       p.setIdPart(this.part.getIdPart());
+       p.setEstado("Completado");
+       p.setJornada("Primera");
+       p.setIdEqLoc(this.part.getIdEqLoc());
+       p.setIdEqVis(this.part.getIdEqVis());
        DefaultTableModel ml = (DefaultTableModel) jTableLocal.getModel();
        DefaultTableModel mv = (DefaultTableModel) jTableVisitante.getModel();
        Jugador j;
+         ControlIncidencia ci =new ControlIncidencia();
+           for (int i = 0; i < this.part.getIncidencias().size(); i++) {
+               ci.delete(this.part.getIncidencias().get(i));
+           }
+       
        for(int i = 0; i< ml.getRowCount();i++){
            j = new Jugador();
            j = (Jugador) ml.getValueAt(i, 0);
-        p.addIncidencia(new Incidencia(idArb, this.part,j.getIdJug(), j, this.jTxtMinLocal.getText(),this.jCmbTiempoLocal.getSelectedItem().toString(),this.jCmbIncLocal.getSelectedItem().toString(),"l"));
+           
+        p.addIncidencia(new Incidencia(this.part.getIdPart(), this.part,j.getIdJug(), j, ml.getValueAt(i, 2).toString(),  ml.getValueAt(i, 3).toString(),ml.getValueAt(i, 1).toString(),"l"));
        }
        for(int i = 0; i< mv.getRowCount();i++){
         j = new Jugador();
            j = (Jugador) mv.getValueAt(i, 0);
-        p.addIncidencia(new Incidencia(idArb, this.part,j.getIdJug(), j, this.jTxtMinVisita.getText(),this.jCmbTiempoVisita.getSelectedItem().toString(),this.jCmbIncVisita.getSelectedItem().toString(),"v"));
+        p.addIncidencia(new Incidencia(this.part.getIdPart(), this.part,j.getIdJug(), j, mv.getValueAt(i, 2).toString(), mv.getValueAt(i, 3).toString(), mv.getValueAt(i, 1).toString(),"v"));
        }
        
        p.setScore(this.jTxtELocal.getText(),this.jTxtEVisita.getText());
@@ -726,8 +741,9 @@ public class frmModPart extends javax.swing.JInternalFrame {
                + "\nGanador: "+ p.getGanador()
                + "\nPuntaje: "+ p.getScoreLocal() + " - " + p.getScoreVisita();
        
+       ControlPartido cp = new ControlPartido ();
+       JOptionPane.showMessageDialog(rootPane,mensaje+"\n"+cp.update(p) );
        
-       JOptionPane.showMessageDialog(rootPane, mensaje,"Resultado:",1);
        }
        
        
@@ -826,4 +842,15 @@ ArrayList<Jugador> jv = cj.getJugadores(this.part.getIdEqVis());
     this.jCmbJugLoc.setModel(cbl);
     this.jCmbJugVis.setModel(cbv);
 }
+
+ public void loadTables(){
+   for (int i = 0; i < this.part.getIncidencias().size(); i++) {
+            if (this.part.getIncidencias().get(i).getEquipo().equals("l")) {
+           agregarTabla(this.part.getIncidencias().get(i).getJugador(),this.part.getIncidencias().get(i).getTipo()  , this.part.getIncidencias().get(i).getMinuto(), this.part.getIncidencias().get(i).getTiempo(), this.jTableLocal);
+       }else if (this.part.getIncidencias().get(i).getEquipo().equals("v")) {
+           agregarTabla(this.part.getIncidencias().get(i).getJugador(),this.part.getIncidencias().get(i).getTipo()  , this.part.getIncidencias().get(i).getMinuto(), this.part.getIncidencias().get(i).getTiempo(), this.jTableVisitante);
+       }
+        }
+ 
+ }
 }

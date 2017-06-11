@@ -5,9 +5,11 @@
  */
 package esquemasypantallas.frmInternal;
 
+import clases.Entrenador;
+import clases.Utilidades;
+import controlador.ControlUsuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,7 +22,12 @@ public class frmRegistroEquipo extends javax.swing.JInternalFrame {
      */
     public frmRegistroEquipo() {
         initComponents();
-     
+        ControlUsuario cu = new ControlUsuario();
+        Utilidades util =new Utilidades();
+        util.loadCombo(cu.getEntrenadores(), jCmbEnt);
+        
+        Entrenador ent = (Entrenador) jCmbEnt.getSelectedItem(); //ASI LO SACAS EL OBJETO PARA QUE PODAS USAR EL ent.getIdEnt para darle set al idEntrenador para su posterior insert
+        
     }
 
     /**
@@ -39,7 +46,6 @@ public class frmRegistroEquipo extends javax.swing.JInternalFrame {
         jTxtEmail = new javax.swing.JLabel();
         JTxtNumero2 = new javax.swing.JTextField();
         jLblIdEntren = new javax.swing.JLabel();
-        JTxtIdEntrenador = new javax.swing.JTextField();
         jIdEquipo4 = new javax.swing.JLabel();
         JTxtDireccion = new javax.swing.JTextField();
         jIdEquipo8 = new javax.swing.JLabel();
@@ -54,6 +60,7 @@ public class frmRegistroEquipo extends javax.swing.JInternalFrame {
         jTxtTelefono = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jTxtNom = new javax.swing.JTextField();
+        jCmbEnt = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -90,17 +97,6 @@ public class frmRegistroEquipo extends javax.swing.JInternalFrame {
         });
 
         jLblIdEntren.setText("Entrenador:");
-
-        JTxtIdEntrenador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTxtIdEntrenadorActionPerformed(evt);
-            }
-        });
-        JTxtIdEntrenador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTxtIdEntrenadorKeyTyped(evt);
-            }
-        });
 
         jIdEquipo4.setText("Direccion del Equipo:");
 
@@ -206,15 +202,15 @@ public class frmRegistroEquipo extends javax.swing.JInternalFrame {
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addGap(3, 3, 3)
                                                         .addComponent(jLblIdEntren)
-                                                        .addGap(45, 45, 45))
+                                                        .addGap(38, 38, 38))
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                         .addComponent(jIdEquipo4)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                     .addComponent(jTxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(JTxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(JTxtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(JTxtIdEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(JTxtColor, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(JTxtDireccion, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jCmbEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addComponent(jIdEquipo7))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,10 +241,10 @@ public class frmRegistroEquipo extends javax.swing.JInternalFrame {
                 .addComponent(jLblMantEquipo)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTxtIdEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLblIdEntren)
                     .addComponent(jLblEmailEquipo)
-                    .addComponent(JTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jIdEquipo4)
@@ -323,19 +319,6 @@ public class frmRegistroEquipo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_JTxtNumero2KeyTyped
 
-    private void JTxtIdEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtIdEntrenadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTxtIdEntrenadorActionPerformed
-
-    private void JTxtIdEntrenadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtIdEntrenadorKeyTyped
-        Character s=evt.getKeyChar();
-        if(!Character.isLetter(s) && s!=KeyEvent.VK_SPACE)
-        {
-            evt.consume();
-            JOptionPane.showMessageDialog(this, "Solo Ingrese Letras con Espacio","",1);
-        }
-    }//GEN-LAST:event_JTxtIdEntrenadorKeyTyped
-
     private void JTxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTxtDireccionActionPerformed
@@ -386,8 +369,8 @@ public class frmRegistroEquipo extends javax.swing.JInternalFrame {
     private javax.swing.JTextField JTxtColor;
     private javax.swing.JTextField JTxtDireccion;
     private javax.swing.JTextField JTxtEmail;
-    private javax.swing.JTextField JTxtIdEntrenador;
     private javax.swing.JTextField JTxtNumero2;
+    private javax.swing.JComboBox<String> jCmbEnt;
     private javax.swing.JLabel jIdEquipo4;
     private javax.swing.JLabel jIdEquipo7;
     private javax.swing.JLabel jIdEquipo8;

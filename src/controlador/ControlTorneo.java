@@ -203,7 +203,7 @@ public class ControlTorneo implements OperacionesDB {
         Statement st;
         ResultSet res;
         String sql;
-        ArrayList lista= new ArrayList();
+        ArrayList<Torneo> lista= new ArrayList<Torneo>();
         try {
             Class.forName(db.getDriver());
             cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
@@ -230,7 +230,23 @@ public class ControlTorneo implements OperacionesDB {
                 
                 
             }
-          
+              for (int i = 0; i < lista.size(); i++) {
+                sql = "select * from compite c inner join equipo e on e.idEq = c.idEq where c.idTor = " + lista.get(i).getIdTor();
+                res = st.executeQuery(sql);
+                while(res.next()){
+                lista.get(i).agregarEquipo(new Equipo(res.getInt("idEq"), 
+                res.getInt("idEnt"), 
+                        null, 
+                        res.getString("eqEmail"), 
+                                res.getString("eqDir"), 
+                                res.getInt("eqNumTar"), 
+                                        String.valueOf(res.getDate("eqFechaIns")), 
+                                        res.getString("eqTel"), 
+                                                res.getString("eqColor")
+                                                ,res.getString("eqNombre")
+                                                        ));
+                }
+            }
             res.close();
             st.close();
             cn.close();
