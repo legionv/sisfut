@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package formularios;
+package formulariosNO_USAR;
 
 import clases.Incidencia;
 import clases.Partido;
@@ -783,7 +783,7 @@ public class frmResPartido extends javax.swing.JFrame {
    return band;
    }
    private Incidencia addIncidencia(String jugador, String minuto, String tiempo, String tipo,String equipo){
-      Incidencia inc= new Incidencia(jugador, minuto, tiempo, tipo, equipo);
+      Incidencia inc= new Incidencia();
        return inc;     
    }
    

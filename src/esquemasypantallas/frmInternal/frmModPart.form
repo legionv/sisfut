@@ -39,7 +39,7 @@
                   </Group>
                   <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,8 +89,8 @@
                                   <Component id="jCmbTiempoVisita" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jTxtEVisita" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTxtJugVisita" alignment="1" max="32767" attributes="0"/>
                               <Component id="jCmbIncVisita" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jCmbJugVis" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -102,12 +102,13 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="jBtnModificar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane2" alignment="0" min="-2" pref="285" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
-              <Component id="jScrollPane2" alignment="0" min="-2" pref="285" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -120,8 +121,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTxtJugVisita" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCmbJugVis" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -141,11 +142,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="139" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jBtnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -160,11 +158,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="EquipoVisita"/>
             <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTxtJugVisita">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Sutano"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
@@ -260,11 +253,6 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jBtnModificar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Modificar Resultado"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Mostrar"/>
@@ -273,11 +261,23 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JComboBox" name="jCmbJugVis">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccionar"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="jBtnAgregarJugador">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Agregar Resultado"/>
+        <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnAgregarJugadorMouseClicked"/>
@@ -304,7 +304,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTxtJugLocal" max="32767" attributes="0"/>
+                                  <Component id="jCmbJugLoc" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -352,7 +352,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTxtJugLocal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCmbJugLoc" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -454,14 +454,6 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTxtJugLocal">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Fulano"/>
-          </Properties>
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTxtJugLocalKeyTyped"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JComboBox" name="jCmbTiempoLocal">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -489,6 +481,18 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnAgregarLocalMouseClicked"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jCmbJugLoc">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Seleccionar"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

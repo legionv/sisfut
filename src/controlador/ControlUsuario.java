@@ -302,4 +302,44 @@ public class ControlUsuario implements OperacionesDB{
         return lista;
     }
     
+     public Usuario login(String name, String pass){
+       Usuario user = null;
+         String sql ="select * from usuarios where username = '"+name+"' and userPass = '"+pass+"' and userDel != 0";
+         ResultSet res;
+         Database db =new Database();
+        Connection cn;
+        Statement st;
+        try {
+            Class.forName(db.getDriver());
+            cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = (Statement) cn.createStatement();
+            
+            res = st.executeQuery(sql);
+            while (res.next()) {
+                user = new Usuario(
+                        res.getInt("idUser"), 
+                        res.getString("userName"), 
+                        res.getString("userPass"),
+                        res.getString("userNombre"),
+                        res.getString("userApellido"), 
+                        res.getString("userLevel"), 
+                        res.getString("userDui"),
+                        res.getString("userEmail"), 
+                        res.getString("userTel"), 
+                        res.getString("userFnac")
+                        
+                );
+                
+                
+            }
+          
+            res.close();
+            st.close();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+       return user;
+    }
 }

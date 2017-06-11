@@ -7,8 +7,10 @@ package esquemasypantallas.frmInternal;
 
 import clases.Arbitro;
 import clases.Incidencia;
+import clases.Jugador;
 import clases.Partido;
 import clases.Utilidades;
+import controlador.ControlJugador;
 import controlador.ControlUsuario;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
@@ -31,8 +33,11 @@ public class frmModPart extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmModPart
      */
+    private Partido part;
     public frmModPart(Partido part) {
         initComponents();
+        this.part = part;
+        combo();
         ControlUsuario cu = new ControlUsuario();
         Utilidades util = new Utilidades();
         this.jTxtELocal.setText(part.getEquipoLocal().toString());
@@ -54,7 +59,6 @@ public class frmModPart extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jTxtEVisita = new javax.swing.JTextField();
-        jTxtJugVisita = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -65,8 +69,8 @@ public class frmModPart extends javax.swing.JInternalFrame {
         jBtnAgregarVisita = new javax.swing.JButton();
         jBtnEliminarVisita = new javax.swing.JButton();
         jCmbTiempoVisita = new javax.swing.JComboBox();
-        jBtnModificar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jCmbJugVis = new javax.swing.JComboBox<>();
         jBtnAgregarJugador = new javax.swing.JButton();
         jBtnLimpiar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -79,10 +83,10 @@ public class frmModPart extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jTxtMinLocal = new javax.swing.JFormattedTextField();
         jCmbIncLocal = new javax.swing.JComboBox();
-        jTxtJugLocal = new javax.swing.JTextField();
         jCmbTiempoLocal = new javax.swing.JComboBox();
         jBtnEliminarLocal = new javax.swing.JButton();
         jBtnAgregarLocal = new javax.swing.JButton();
+        jCmbJugLoc = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jTxtHoraInicio = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -102,8 +106,6 @@ public class frmModPart extends javax.swing.JInternalFrame {
 
         jTxtEVisita.setText("EquipoVisita");
         jTxtEVisita.setEnabled(false);
-
-        jTxtJugVisita.setText("Sutano");
 
         jLabel8.setText("Jugador");
 
@@ -154,14 +156,14 @@ public class frmModPart extends javax.swing.JInternalFrame {
 
         jCmbTiempoVisita.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Primer tiempo", "Segundo Tiempo", "Tiempo Extra" }));
 
-        jBtnModificar.setText("Modificar Resultado");
-
         jButton1.setText("Mostrar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
+
+        jCmbJugVis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -183,8 +185,8 @@ public class frmModPart extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCmbTiempoVisita, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jTxtEVisita)
-                            .addComponent(jTxtJugVisita, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jCmbIncVisita, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jCmbIncVisita, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCmbJugVis, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBtnAgregarVisita)
@@ -192,10 +194,10 @@ public class frmModPart extends javax.swing.JInternalFrame {
                         .addComponent(jBtnEliminarVisita)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jBtnModificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,8 +208,8 @@ public class frmModPart extends javax.swing.JInternalFrame {
                     .addComponent(jTxtEVisita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtJugVisita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jCmbJugVis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -223,13 +225,11 @@ public class frmModPart extends javax.swing.JInternalFrame {
                     .addComponent(jBtnEliminarVisita))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnModificar)
-                    .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
 
-        jBtnAgregarJugador.setText("Agregar Resultado");
+        jBtnAgregarJugador.setText("Guardar");
         jBtnAgregarJugador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBtnAgregarJugadorMouseClicked(evt);
@@ -281,13 +281,6 @@ public class frmModPart extends javax.swing.JInternalFrame {
 
         jCmbIncLocal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Gol de penalti", "Autogol", "Gol olímpico", "Gol libre directo", "Asistencia", "Penalti", "Corner", "Tarjeta Roja", "Tarjeta Amarilla" }));
 
-        jTxtJugLocal.setText("Fulano");
-        jTxtJugLocal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTxtJugLocalKeyTyped(evt);
-            }
-        });
-
         jCmbTiempoLocal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Primer tiempo", "Segundo Tiempo", "Tiempo Extra" }));
 
         jBtnEliminarLocal.setText("Eliminar");
@@ -304,6 +297,8 @@ public class frmModPart extends javax.swing.JInternalFrame {
             }
         });
 
+        jCmbJugLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -316,7 +311,7 @@ public class frmModPart extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTxtJugLocal))
+                                .addComponent(jCmbJugLoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -351,7 +346,7 @@ public class frmModPart extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTxtJugLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCmbJugLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -470,7 +465,7 @@ public class frmModPart extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,10 +489,10 @@ public class frmModPart extends javax.swing.JInternalFrame {
 
     private void jBtnAgregarVisitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarVisitaMouseClicked
         // TODO add your handling code here:
-        if(validar(jTxtJugVisita,jCmbIncVisita,jTxtMinVisita,jCmbTiempoVisita)){
-            if(alreadyInTable(jTxtJugVisita.getText()+this.jTxtMinVisita.getText()+this.jCmbTiempoVisita.getSelectedItem().toString(),this.jTableVisitante)){
-                agregarTabla(jTxtJugVisita.getText(),jCmbIncVisita.getSelectedItem().toString(),jTxtMinVisita.getText(),this.jCmbTiempoVisita.getSelectedItem().toString(),this.jTableVisitante);
-                limpiar(jTxtJugVisita,jCmbIncVisita,jTxtMinVisita,jCmbTiempoVisita);
+        if(validar(jCmbJugVis,jCmbIncVisita,jTxtMinVisita,jCmbTiempoVisita)){
+            if(alreadyInTable(this.jCmbJugVis.getSelectedItem().toString()+this.jTxtMinVisita.getText()+this.jCmbTiempoVisita.getSelectedItem().toString(),this.jTableVisitante)){
+                agregarTabla((Jugador) this.jCmbJugVis.getSelectedItem(),jCmbIncVisita.getSelectedItem().toString(),jTxtMinVisita.getText(),this.jCmbTiempoVisita.getSelectedItem().toString(),this.jTableVisitante);
+                limpiar(jCmbJugVis,jCmbIncVisita,jTxtMinVisita,jCmbTiempoVisita);
             }
         }
 
@@ -541,13 +536,6 @@ public class frmModPart extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_jBtnLimpiarMouseClicked
 
-    private void jTxtJugLocalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtJugLocalKeyTyped
-        // TODO add your handling code here:
-        if(Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_SPACE){
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTxtJugLocalKeyTyped
-
     private void jBtnEliminarLocalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarLocalMouseClicked
         // TODO add your handling code here:
         int index = jTableLocal.getSelectedRow();
@@ -557,10 +545,10 @@ public class frmModPart extends javax.swing.JInternalFrame {
 
     private void jBtnAgregarLocalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarLocalMouseClicked
         // TODO add your handling code here:
-        if(validar(jTxtJugLocal,jCmbIncLocal,jTxtMinLocal,jCmbTiempoLocal)){
-            if(alreadyInTable(jTxtJugLocal.getText()+this.jTxtMinLocal.getText()+this.jCmbTiempoLocal.getSelectedItem().toString(),this.jTableLocal)){
-                agregarTabla(jTxtJugLocal.getText(),jCmbIncLocal.getSelectedItem().toString(),jTxtMinLocal.getText(),this.jCmbTiempoLocal.getSelectedItem().toString(),this.jTableLocal);
-                limpiar(jTxtJugLocal,jCmbIncLocal,jTxtMinLocal,jCmbTiempoLocal);
+        if(validar(jCmbJugLoc,jCmbIncLocal,jTxtMinLocal,jCmbTiempoLocal)){
+            if(alreadyInTable(jCmbJugLoc.getSelectedItem().toString()+this.jTxtMinLocal.getText()+this.jCmbTiempoLocal.getSelectedItem().toString(),this.jTableLocal)){
+                agregarTabla((Jugador) jCmbJugLoc.getSelectedItem(),jCmbIncLocal.getSelectedItem().toString(),jTxtMinLocal.getText(),this.jCmbTiempoLocal.getSelectedItem().toString(),this.jTableLocal);
+                limpiar(jCmbJugLoc,jCmbIncLocal,jTxtMinLocal,jCmbTiempoLocal);
             }
         }
 
@@ -574,11 +562,12 @@ public class frmModPart extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBtnEliminarLocal;
     private javax.swing.JButton jBtnEliminarVisita;
     private javax.swing.JButton jBtnLimpiar;
-    private javax.swing.JButton jBtnModificar;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCmbArbitro;
     private javax.swing.JComboBox jCmbIncLocal;
     private javax.swing.JComboBox jCmbIncVisita;
+    private javax.swing.JComboBox<String> jCmbJugLoc;
+    private javax.swing.JComboBox<String> jCmbJugVis;
     private javax.swing.JComboBox jCmbTiempoLocal;
     private javax.swing.JComboBox jCmbTiempoVisita;
     private javax.swing.JLabel jLabel1;
@@ -607,17 +596,15 @@ public class frmModPart extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField jTxtHoraFin;
     private javax.swing.JFormattedTextField jTxtHoraInicio;
     private javax.swing.JTextField jTxtJornada;
-    private javax.swing.JTextField jTxtJugLocal;
-    private javax.swing.JTextField jTxtJugVisita;
     private javax.swing.JFormattedTextField jTxtMinLocal;
     private javax.swing.JFormattedTextField jTxtMinVisita;
     // End of variables declaration//GEN-END:variables
 
- private boolean validar(JTextField jugador,JComboBox incidencia,JFormattedTextField minuto, JComboBox tiempo){
+ private boolean validar(JComboBox jugador,JComboBox incidencia,JFormattedTextField minuto, JComboBox tiempo){
     boolean bandera = true;
     String errors="";
    
-    if(jugador.getText().equals("") || incidencia.getSelectedIndex() == 0 || minuto.getText().trim().length() == 1 || tiempo.getSelectedIndex() == 0){
+    if(jugador.getSelectedItem().equals("Seleccionar") || incidencia.getSelectedIndex() == 0 || minuto.getText().trim().length() == 1 || tiempo.getSelectedIndex() == 0){
     bandera = false;
     
     errors = " Debe llenar todos los campos y seleccionar un item de las cajas de selección\n";
@@ -627,8 +614,8 @@ public class frmModPart extends javax.swing.JInternalFrame {
         }
     return bandera;    
     }
-   private void limpiar(JTextField jugador,JComboBox incidencia,JFormattedTextField minuto, JComboBox tiempo){
-    jugador.setText("");
+   private void limpiar(JComboBox jugador,JComboBox incidencia,JFormattedTextField minuto, JComboBox tiempo){
+    jugador.setSelectedIndex(0);
     incidencia.setSelectedIndex(0);
     minuto.setText("");
     tiempo.setSelectedIndex(0);
@@ -708,14 +695,26 @@ public class frmModPart extends javax.swing.JInternalFrame {
    private void llenar(){
        
        if(validarEnviar()){
-       Partido p = new Partido(this.jTxtEVisita.getText(), this.jTxtELocal.getText(), this.jTxtJornada.getText(),this.jTxtHoraInicio.getText(),this.jTxtHoraFin.getText(),this.jTxtFecha.getText());
+       Partido p = new Partido();
+       p.setFecha(jTxtFecha.getText());
+       p.setHora_inicio(jTxtHoraInicio.getText());
+       p.setHora_fin(jTxtHoraFin.getText());
+         Object arb = this.jCmbArbitro.getSelectedItem();
+        int idArb = ((Arbitro)arb).getIdArb();
+       p.setIdArb(idArb);
+     
        DefaultTableModel ml = (DefaultTableModel) jTableLocal.getModel();
        DefaultTableModel mv = (DefaultTableModel) jTableVisitante.getModel();
+       Jugador j;
        for(int i = 0; i< ml.getRowCount();i++){
-        p.addIncidencia(addIncidencia(ml.getValueAt(i, 0).toString(), ml.getValueAt(i, 2).toString(), ml.getValueAt(i, 3).toString(),ml.getValueAt(i, 1).toString(),"l"));
+           j = new Jugador();
+           j = (Jugador) ml.getValueAt(i, 0);
+        p.addIncidencia(new Incidencia(idArb, this.part,j.getIdJug(), j, this.jTxtMinLocal.getText(),this.jCmbTiempoLocal.getSelectedItem().toString(),this.jCmbIncLocal.getSelectedItem().toString(),"l"));
        }
        for(int i = 0; i< mv.getRowCount();i++){
-        p.addIncidencia(addIncidencia(mv.getValueAt(i, 0).toString(), mv.getValueAt(i, 2).toString(), mv.getValueAt(i, 3).toString(),mv.getValueAt(i, 1).toString(),"v"));
+        j = new Jugador();
+           j = (Jugador) mv.getValueAt(i, 0);
+        p.addIncidencia(new Incidencia(idArb, this.part,j.getIdJug(), j, this.jTxtMinVisita.getText(),this.jCmbTiempoVisita.getSelectedItem().toString(),this.jCmbIncVisita.getSelectedItem().toString(),"v"));
        }
        
        p.setScore(this.jTxtELocal.getText(),this.jTxtEVisita.getText());
@@ -772,17 +771,14 @@ public class frmModPart extends javax.swing.JInternalFrame {
    
    return band;
    }
-   private Incidencia addIncidencia(String jugador, String minuto, String tiempo, String tipo,String equipo){
-      Incidencia inc= new Incidencia(jugador, minuto, tiempo, tipo, equipo);
-       return inc;     
-   }
+  
    
 private void limpiar(){
 this.jTxtFecha.setText("");
 this.jTxtHoraInicio.setText("");
 this.jTxtHoraFin.setText("");
-this.jTxtJugLocal.setText("");
-this.jTxtJugVisita.setText("");
+this.jCmbJugLoc.setSelectedIndex(0);
+this.jCmbJugVis.setSelectedIndex(0);
 this.jCmbIncLocal.setSelectedIndex(0);
 this.jCmbIncVisita.setSelectedIndex(0);
 this.jTxtMinLocal.setText("");
@@ -804,9 +800,9 @@ modelv.setRowCount(0);
         }
     }
     
-    private void agregarTabla(String nom,String inc,String min,String tiempo, JTable tabla){
+    private void agregarTabla(Jugador nom,String inc,String min,String tiempo, JTable tabla){
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
-        String[] vecto = new String[4];
+        Object[] vecto = new Object[4];
         vecto[0] = nom;
         vecto[1] = inc;
         vecto[2] = min;
@@ -815,5 +811,19 @@ modelv.setRowCount(0);
     }
 
 
-
+public void combo(){
+DefaultComboBoxModel cbl = (DefaultComboBoxModel) this.jCmbJugLoc.getModel();
+DefaultComboBoxModel cbv = (DefaultComboBoxModel) this.jCmbJugVis.getModel();
+ControlJugador cj = new ControlJugador();
+ArrayList<Jugador> jl = cj.getJugadores(this.part.getIdEqLoc());
+ArrayList<Jugador> jv = cj.getJugadores(this.part.getIdEqVis());
+    for (int i = 0; i < jl.size(); i++) {
+        cbl.addElement(jl.get(i));
+    }
+    for (int i = 0; i < jv.size(); i++) {
+        cbv.addElement(jv.get(i));
+    }
+    this.jCmbJugLoc.setModel(cbl);
+    this.jCmbJugVis.setModel(cbv);
+}
 }

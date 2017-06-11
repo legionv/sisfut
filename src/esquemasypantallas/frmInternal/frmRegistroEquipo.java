@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package formularios;
+package esquemasypantallas.frmInternal;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -11,26 +11,16 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Madeline
+ * @author Luis
  */
-public class FrmRegistroEquipo extends javax.swing.JFrame {
-DefaultTableModel modelo=new DefaultTableModel();
+public class frmRegistroEquipo extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form FrmRegistroEquipo
+     * Creates new form frmEquipo
      */
-    public FrmRegistroEquipo() {
+    public frmRegistroEquipo() {
         initComponents();
-        modelo.addColumn("Nombre Equipo");
-        modelo.addColumn("Entrenador");
-        modelo.addColumn("e-Mail Equipo");
-        modelo.addColumn("Direccion Equipo");
-        modelo.addColumn("Numero Tarjeta");
-        modelo.addColumn("Fecha Inscripcion");
-        modelo.addColumn("Telefono Equipo");
-        modelo.addColumn("Color Equipo");
-        this.jTable1.setModel(modelo);
-        
+     
     }
 
     /**
@@ -62,12 +52,11 @@ DefaultTableModel modelo=new DefaultTableModel();
         JBtnGuardar = new javax.swing.JButton();
         jTxtFecha = new javax.swing.JFormattedTextField();
         jTxtTelefono = new javax.swing.JFormattedTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTxtNom = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -187,23 +176,6 @@ DefaultTableModel modelo=new DefaultTableModel();
             ex.printStackTrace();
         }
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         jLabel1.setText("Nombre Equipo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -263,11 +235,8 @@ DefaultTableModel modelo=new DefaultTableModel();
                                             .addComponent(jTxtNom)))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(166, 166, 166)
-                        .addComponent(jLblMantEquipo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(jLblMantEquipo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,148 +274,109 @@ DefaultTableModel modelo=new DefaultTableModel();
                     .addComponent(JBtnNuevo)
                     .addComponent(JBtnModificar)
                     .addComponent(JBtnEliminar))
-                .addGap(46, 46, 46)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnNuevoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JBtnNuevoActionPerformed
-
-    private void JTxtIdEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtIdEntrenadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTxtIdEntrenadorActionPerformed
-
     private void JTxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTxtEmailActionPerformed
 
-    private void JTxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTxtDireccionActionPerformed
-
-    private void JTxtColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtColorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTxtColorActionPerformed
+    private void JTxtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtEmailKeyTyped
+        Character s=evt.getKeyChar();
+        if((s<'0'|| s>'9') && (s<'a'||s>'z') && (s<'-'||s>'-') && (s<'@'|| s>'@')&& (s<'.'||s>'.')&& (s<'_'|| s>'_')){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo Ingrese Letras Minusculas, Numeros y Caracteres Especiales -,_,@,.","",1);
+        }
+    }//GEN-LAST:event_JTxtEmailKeyTyped
 
     private void JTxtNumero2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtNumero2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTxtNumero2ActionPerformed
 
-    private void JBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnModificarActionPerformed
+    private void JTxtNumero2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtNumero2KeyTyped
+        Character s=evt.getKeyChar();
+        if(!Character.isDigit(s))
+        {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo Ingrese Numeros","",1);
+        }
+    }//GEN-LAST:event_JTxtNumero2KeyTyped
+
+    private void JTxtIdEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtIdEntrenadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JBtnModificarActionPerformed
+    }//GEN-LAST:event_JTxtIdEntrenadorActionPerformed
+
+    private void JTxtIdEntrenadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtIdEntrenadorKeyTyped
+        Character s=evt.getKeyChar();
+        if(!Character.isLetter(s) && s!=KeyEvent.VK_SPACE)
+        {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo Ingrese Letras con Espacio","",1);
+        }
+    }//GEN-LAST:event_JTxtIdEntrenadorKeyTyped
+
+    private void JTxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTxtDireccionActionPerformed
+
+    private void JTxtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtDireccionKeyTyped
+        Character s=evt.getKeyChar();
+        if((s<'0'|| s>'9') && (s<'a'||s>'z') && (s<'-'||s>'-') && (s<'A'|| s>'Z')&& (s<'#'||s>'#')&& s!=KeyEvent.VK_SPACE){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo Ingrese Letras, Numeros y Caracteres Especiales #,-","",1);
+        }
+    }//GEN-LAST:event_JTxtDireccionKeyTyped
+
+    private void JTxtColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtColorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTxtColorActionPerformed
+
+    private void JTxtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtColorKeyTyped
+        Character s=evt.getKeyChar();
+        if(!Character.isLetter(s) && s!=KeyEvent.VK_SPACE)
+        {JOptionPane.showMessageDialog(this, "Solo Ingrese Letras con Espacio","",1);
+            evt.consume();
+        }
+    }//GEN-LAST:event_JTxtColorKeyTyped
+
+    private void JBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnNuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBtnNuevoActionPerformed
 
     private void JBtnNuevoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_JBtnNuevoPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_JBtnNuevoPropertyChange
 
-    private void JTxtIdEntrenadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtIdEntrenadorKeyTyped
-    Character s=evt.getKeyChar(); 
-    if(!Character.isLetter(s) && s!=KeyEvent.VK_SPACE)
-    {
-    evt.consume();
-    JOptionPane.showMessageDialog(this, "Solo Ingrese Letras con Espacio","",1);
-    }
-    }//GEN-LAST:event_JTxtIdEntrenadorKeyTyped
-
-    private void JTxtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtEmailKeyTyped
-    Character s=evt.getKeyChar();
-    if((s<'0'|| s>'9') && (s<'a'||s>'z') && (s<'-'||s>'-') && (s<'@'|| s>'@')&& (s<'.'||s>'.')&& (s<'_'|| s>'_')){
-        getToolkit().beep();
-        evt.consume();
-    JOptionPane.showMessageDialog(this, "Solo Ingrese Letras Minusculas, Numeros y Caracteres Especiales -,_,@,.","",1);    
-    }
-    }//GEN-LAST:event_JTxtEmailKeyTyped
-
-    private void JTxtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtColorKeyTyped
-    Character s=evt.getKeyChar(); 
-    if(!Character.isLetter(s) && s!=KeyEvent.VK_SPACE)
-    {JOptionPane.showMessageDialog(this, "Solo Ingrese Letras con Espacio","",1);
-    evt.consume();
-    }
-    }//GEN-LAST:event_JTxtColorKeyTyped
-
-    private void JTxtNumero2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtNumero2KeyTyped
-       Character s=evt.getKeyChar(); 
-    if(!Character.isDigit(s))
-    {
-    evt.consume();
-    JOptionPane.showMessageDialog(this, "Solo Ingrese Numeros","",1);
-    }
-    }//GEN-LAST:event_JTxtNumero2KeyTyped
-
-    private void JTxtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtDireccionKeyTyped
-       Character s=evt.getKeyChar();
-    if((s<'0'|| s>'9') && (s<'a'||s>'z') && (s<'-'||s>'-') && (s<'A'|| s>'Z')&& (s<'#'||s>'#')&& s!=KeyEvent.VK_SPACE){
-        getToolkit().beep();
-        evt.consume();
-        JOptionPane.showMessageDialog(this, "Solo Ingrese Letras, Numeros y Caracteres Especiales #,-","",1);
-    }
-    }//GEN-LAST:event_JTxtDireccionKeyTyped
+    private void JBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBtnModificarActionPerformed
 
     private void JBtnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBtnGuardarMouseClicked
-    String[] agregar= new String[8];
-    agregar[0]=this.jTxtNom.getText();
-    agregar[1]=JTxtIdEntrenador.getText();
-    agregar[2]=JTxtEmail.getText();
-    agregar[3]=JTxtDireccion.getText();
-    agregar[4]=JTxtNumero2.getText();
-    agregar[5]=jTxtFecha.getText();
-    agregar[6]=jTxtTelefono.getText();
-    agregar[7]=JTxtColor.getText();
-    modelo.addRow(agregar);
+ 
     }//GEN-LAST:event_JBtnGuardarMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistroEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistroEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistroEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistroEquipo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmRegistroEquipo().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBtnEliminar;
@@ -467,8 +397,6 @@ DefaultTableModel modelo=new DefaultTableModel();
     private javax.swing.JLabel jLblIdEntren;
     private javax.swing.JLabel jLblMantEquipo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jTxtEmail;
     private javax.swing.JFormattedTextField jTxtFecha;
     private javax.swing.JTextField jTxtNom;

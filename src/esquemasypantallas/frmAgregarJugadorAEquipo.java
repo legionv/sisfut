@@ -1,15 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package esquemasypantallas;
 
+import clases.Equipo;
+import clases.Jugador;
+import clases.Utilidades;
+import connection.Database;
+import controlador.ControlEquipo;
+import controlador.ControlJugador;
+import esquemasypantallas.frmInternal.frmJugador;
+import esquemasypantallas.frmInternal.frmModJug;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDesktopPane;
-
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 /**
  *
- * @author Luis
+ * @author Gerson Rodriguez
  */
 public class frmAgregarJugadorAEquipo extends javax.swing.JInternalFrame {
 
@@ -18,6 +30,8 @@ public class frmAgregarJugadorAEquipo extends javax.swing.JInternalFrame {
      */
     public frmAgregarJugadorAEquipo() {
         initComponents();
+        combo();
+       
     }
 
     /**
@@ -29,43 +43,50 @@ public class frmAgregarJugadorAEquipo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablaJuga = new javax.swing.JTable();
         jBtnAgregar = new javax.swing.JButton();
         jBtnGuardar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBtnEliminar = new javax.swing.JButton();
+        jBtnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jCbxSelec = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jTextFieldBuscar = new javax.swing.JTextField();
+        jBtnDetalle = new javax.swing.JButton();
+        jBtnModifcar = new javax.swing.JButton();
+        jBtnActualizar = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setClosable(true);
 
         jTablaJuga.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Juan Perez", "portero", "50", "5"},
-                {"Mauricio Ramirez", "delantero", "1", "0"},
-                {"Shogun Rua", "defensa", "5", "5"},
-                {"Cain Velasques", "medio campo", "9", "2"}
+
             },
             new String [] {
-                "Nombre", "Posición", "Número", "Tarjetas rojas"
+
             }
         ));
         jScrollPane2.setViewportView(jTablaJuga);
 
         jBtnAgregar.setText("Agregar Jugador");
+        jBtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAgregarMouseClicked(evt);
+            }
+        });
 
         jBtnGuardar.setText("Guardar");
 
-        jButton1.setText("Eliminar");
+        jBtnEliminar.setText("Eliminar");
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBtnCancelarActionPerformed(evt);
             }
         });
 
@@ -74,11 +95,41 @@ public class frmAgregarJugadorAEquipo extends javax.swing.JInternalFrame {
         jLabel2.setText("Equipo");
 
         jCbxSelec.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar" }));
+        jCbxSelec.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCbxSelecItemStateChanged(evt);
+            }
+        });
 
-        jButton3.setText("Ver detalle");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscarKeyTyped(evt);
+            }
+        });
+
+        jBtnDetalle.setText("Ver detalle");
+        jBtnDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jBtnDetalleActionPerformed(evt);
+            }
+        });
+
+        jBtnModifcar.setText("Modificar Jugador");
+        jBtnModifcar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnModifcarMouseClicked(evt);
+            }
+        });
+
+        jBtnActualizar.setText("ActualizarTabla");
+        jBtnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnActualizarMouseClicked(evt);
+            }
+        });
+        jBtnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnActualizarActionPerformed(evt);
             }
         });
 
@@ -87,13 +138,30 @@ public class frmAgregarJugadorAEquipo extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(186, 186, 186))
+                .addGap(58, 58, 58)
+                .addComponent(jBtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jBtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jBtnActualizar)
+                .addGap(42, 42, 42)
+                .addComponent(jBtnDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jBtnAgregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnModifcar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane2)
+                            .addContainerGap())
                         .addGroup(layout.createSequentialGroup()
                             .addGap(8, 8, 8)
                             .addComponent(jLabel2)
@@ -102,72 +170,200 @@ public class frmAgregarJugadorAEquipo extends javax.swing.JInternalFrame {
                             .addGap(18, 18, 18)
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBtnAgregar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(19, 19, 19))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jBtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap()))
+                            .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(19, 372, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnAgregar)
+                    .addComponent(jBtnEliminar)
+                    .addComponent(jBtnModifcar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnCancelar)
+                    .addComponent(jBtnGuardar)
+                    .addComponent(jBtnDetalle)
+                    .addComponent(jBtnActualizar)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(7, 7, 7)
+                    .addGap(8, 8, 8)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCbxSelec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBtnAgregar)
-                        .addComponent(jButton1))
-                    .addGap(14, 14, 14)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBtnGuardar)
-                        .addComponent(jButton2))
-                    .addGap(7, 7, 7)))
+                        .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(16, 16, 16)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addGap(48, 48, 48)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jBtnDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDetalleActionPerformed
         // TODO add your handling code here:
         
         frmDetalleJugador obj = new frmDetalleJugador();
         JDesktopPane pane = getDesktopPane();
         pane.add(obj);
         obj.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jBtnDetalleActionPerformed
 
+    private void jBtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnActualizarActionPerformed
 
+    private void jTextFieldBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarKeyTyped
+        // TODO add your handling code here:
+        
+        filtrar();
+    }//GEN-LAST:event_jTextFieldBuscarKeyTyped
+
+    private void jBtnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnActualizarMouseClicked
+        // TODO add your handling code here:
+        
+        reset();
+    }//GEN-LAST:event_jBtnActualizarMouseClicked
+
+    private void jCbxSelecItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCbxSelecItemStateChanged
+        // TODO add your handling code here:
+        table();
+    }//GEN-LAST:event_jCbxSelecItemStateChanged
+
+    private void jBtnModifcarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnModifcarMouseClicked
+        // TODO add your handling code here:
+        int i = this.jTablaJuga.getSelectedRow();
+        if (i != -1) {
+            Jugador jug = (Jugador) this.jTablaJuga.getValueAt(i, 0); //ENVIAR ESTA VARIABLE AL CONSTRUCTOR DEL JINTERNALFRAME frmModJug
+            Utilidades util = new Utilidades();
+            frmModJug form = new frmModJug(jug);
+            JDesktopPane pane = getDesktopPane();
+            util.openForm(form, pane);
+        }
+        
+    }//GEN-LAST:event_jBtnModifcarMouseClicked
+
+    private void jBtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgregarMouseClicked
+        // TODO add your handling code here:
+        if (this.jCbxSelec.getSelectedIndex() != 0) {
+             Utilidades util = new Utilidades();
+             Object obj = this.jCbxSelec.getSelectedItem();
+        int idEq = ((Equipo)obj).getIdEq();
+            frmJugador form = new frmJugador(idEq);
+            JDesktopPane pane = getDesktopPane();
+            util.openForm(form, pane);
+        }
+        
+    }//GEN-LAST:event_jBtnAgregarMouseClicked
+
+    
+    
+    
+    
+    public void llenarTabla(ArrayList<Jugador> ju){
+  
+  
+ String [] columnas = {"Nombre","DUI","Posicion","Fecha Nacimiento","Email","Numero Tarjetas","Numero Camiseta","Telefono"};
+Object [] obj = new Object [9];
+DefaultTableModel tm= new DefaultTableModel(null,columnas);
+  
+    
+     try {
+        
+         
+           for (int i = 0; i < ju.size(); i++) {
+               
+         obj[0] = ju.get(i);
+         obj[1] = ju.get(i).getDui();
+         obj[2] = ju.get(i).getPos();
+         obj[3] = ju.get(i).getFechaNac();
+         obj[4] = ju.get(i).getEmail();
+         obj[5] = ju.get(i).getTarjeta();
+         obj[6] = ju.get(i).getCamiseta();
+         obj[7] = ju.get(i).getTel();
+         tm.addRow(obj);
+     }
+         
+     this.jTablaJuga.setModel(tm);
+     //TableColumnModel tcm = this.jTable2.getColumnModel();
+     //tcm.removeColumn(tcm.getColumn(0));
+     } catch (Exception e) {
+         JOptionPane.showMessageDialog(rootPane, e.toString());
+     }
+       
+     
+ }
+    public void filtrar(){
+ 
+     String filtro = this.jTextFieldBuscar.getText();
+     
+     ControlJugador cu = new ControlJugador();
+     llenarTabla(cu.filtrar(filtro));
+ }
+    public void reset(){
+  try {
+            ControlJugador cu = new ControlJugador();
+            ArrayList<Jugador> u = cu.show();
+            llenarTabla(u);
+        } catch (Exception e) {
+        }
+ }
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnActualizar;
     private javax.swing.JButton jBtnAgregar;
+    private javax.swing.JButton jBtnCancelar;
+    private javax.swing.JButton jBtnDetalle;
+    private javax.swing.JButton jBtnEliminar;
     private javax.swing.JButton jBtnGuardar;
+    private javax.swing.JButton jBtnModifcar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jCbxSelec;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablaJuga;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldBuscar;
     // End of variables declaration//GEN-END:variables
+
+
+    
+    public void combo(){
+    
+    ControlEquipo ce = new ControlEquipo();
+        DefaultComboBoxModel cmb = (DefaultComboBoxModel) this.jCbxSelec.getModel();
+        ArrayList<Equipo> eqs= ce.show();
+        for (int i = 0; i < eqs.size(); i++) {
+            cmb.addElement(eqs.get(i));
+        }
+        this.jCbxSelec.setModel(cmb);
+    
+    }
+    public void table(){
+         if (this.jCbxSelec.getSelectedIndex() != 0) {
+            ControlJugador cj = new ControlJugador();
+        Object obj = this.jCbxSelec.getSelectedItem();
+        int idEq = ((Equipo)obj).getIdEq();
+        llenarTabla(cj.getJugadores(idEq));
+        }else{
+         
+
+DefaultTableModel dm = (DefaultTableModel) this.jTablaJuga.getModel();
+int rowCount = dm.getRowCount();
+//Remove rows one by one from the end of the table
+for (int i = rowCount - 1; i >= 0; i--) {
+    dm.removeRow(i);
+}
+         }
+}
 }

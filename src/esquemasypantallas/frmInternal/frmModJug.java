@@ -12,15 +12,13 @@ import javax.swing.JOptionPane;
  *
  * @author Luis
  */
-public class frmJugador extends javax.swing.JInternalFrame {
+public class frmModJug extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmJugador
      */
-    private int idEq;
-    public frmJugador( int idEq) {
+    public frmModJug(Jugador jug) {
         initComponents();
-        this.idEq = idEq;
     }
 
     /**

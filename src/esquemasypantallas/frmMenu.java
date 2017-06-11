@@ -5,6 +5,7 @@
  */
 package esquemasypantallas;
 
+import clases.Usuario;
 import esquemasypantallas.frmInternal.frmJugador;
 import esquemasypantallas.frmInternal.frmUser;
 import javax.swing.JOptionPane;
@@ -20,11 +21,18 @@ public class frmMenu extends javax.swing.JFrame {
     /**
      * Creates new form frmMenu
      */
-    public frmMenu() {
+    private Usuario user;
+    public frmMenu(Usuario user) {
         initComponents();
+        this.user =user;
+        System.out.println(this.user.getNivel());
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
     }
-
+     public frmMenu() {
+        initComponents();
+        
+        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -10,7 +10,10 @@ package clases;
  * @author Luis
  */
 public class Incidencia {
-    private String jugador;
+    private int idPart;
+    private Partido part;
+    private int idJug;
+    private Jugador jugador;
     private String minuto;
     private String tiempo;
     private String tipo;
@@ -18,13 +21,18 @@ public class Incidencia {
     public Incidencia() {
     }
 
-    public Incidencia(String jugador, String minuto, String tiempo, String tipo, String equipo) {
+    public Incidencia(int idPart, Partido part, int idJug, Jugador jugador, String minuto, String tiempo, String tipo, String equipo) {
+        this.idPart = idPart;
+        this.part = part;
+        this.idJug = idJug;
         this.jugador = jugador;
         this.minuto = minuto;
         this.tiempo = tiempo;
         this.tipo = tipo;
         this.equipo = equipo;
     }
+
+  
 
     public String getEquipo() {
         return equipo;
@@ -34,15 +42,39 @@ public class Incidencia {
         this.equipo = equipo;
     }
 
-  
+    public int getIdPart() {
+        return idPart;
+    }
 
-    public String getJugador() {
+    public void setIdPart(int idPart) {
+        this.idPart = idPart;
+    }
+
+    public Partido getPart() {
+        return part;
+    }
+
+    public void setPart(Partido part) {
+        this.part = part;
+    }
+
+    public int getIdJug() {
+        return idJug;
+    }
+
+    public void setIdJug(int idJug) {
+        this.idJug = idJug;
+    }
+
+    public Jugador getJugador() {
         return jugador;
     }
 
-    public void setJugador(String jugador) {
+    public void setJugador(Jugador jugador) {
         this.jugador = jugador;
     }
+
+  
 
     public String getMinuto() {
         return minuto;

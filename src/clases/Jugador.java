@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
  * @author Luis
  */
 public class Jugador {
-    
+    private int idJug;
+    private int idEq;
     private String nombre;
     private int camiseta;
     private String tel;
@@ -23,7 +24,45 @@ public class Jugador {
     private String fechaNac;
     private String Pos;
     private String dui;
+    private Equipo equipo;
 
+    public Jugador(int idJug, int idEq, String nombre, int camiseta, String tel, String email, String tarjeta, String fechaNac, String Pos, String dui, Equipo equipo) {
+        this.idJug = idJug;
+        this.idEq = idEq;
+        this.nombre = nombre;
+        this.camiseta = camiseta;
+        this.tel = tel;
+        this.email = email;
+        this.tarjeta = tarjeta;
+        this.fechaNac = fechaNac;
+        this.Pos = Pos;
+        this.dui = dui;
+        this.equipo = equipo;
+    }
+
+    public int getIdJug() {
+        return idJug;
+    }
+
+    public void setIdJug(int idJug) {
+        this.idJug = idJug;
+    }
+
+    public int getIdEq() {
+        return idEq;
+    }
+
+    public void setIdEq(int idEq) {
+        this.idEq = idEq;
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
     public Jugador() {
     }
 
@@ -159,5 +198,9 @@ public class Jugador {
             JOptionPane.showMessageDialog(null, errores,"Los datos de entrada contienen errores de validación",1);
         }
         return bandera;
+    }
+     @Override
+    public String toString() {
+        return this.nombre;
     }
 }

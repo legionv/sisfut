@@ -61,10 +61,12 @@ public class ControlEquipo implements OperacionesDB{
                                                 res.getString("eqColor")
                                                 ,res.getString("eqNombre")
                                                         ));
-                
+                 
                 
             }
-          
+            for (int i = 0; i < lista.size(); i++) {
+                
+            }
             res.close();
             st.close();
             cn.close();
