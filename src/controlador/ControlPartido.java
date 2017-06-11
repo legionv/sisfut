@@ -83,10 +83,11 @@ public class ControlPartido implements OperacionesDB{
     ControlEquipo ce = new ControlEquipo();
     Database db = new Database();
     Arbitro arb;
-    ArrayList<Partido> parts = null;
+    ArrayList<Partido> parts = new ArrayList<Partido>();
     Statement st = null;
     Connection cn = null;
     ResultSet res = null;
+    Partido par;
     String sql = "";
         try {
             Class.forName(db.getDriver());
@@ -95,9 +96,23 @@ public class ControlPartido implements OperacionesDB{
             sql = "select * from partido where idTor = "  + tr.getIdTor();
             res = st.executeQuery(sql);
             while (res.next()) {         
-                arb = new Arbitro();
-                System.out.println(res.getDate("partFecha"));
-                //parts.add(new Partido(res.getInt("idTor"), res.getInt("idEqVis"), res.getInt("idEqLoc"), res.getInt("idArb"),arb, ce.crearEquipo(res.getInt("idEqVis")), ce.crearEquipo(res.getInt("idEqLoc")), res.getString("partEstado"), String.valueOf(res.getTime("partHora")), String.valueOf(res.getTime("partFin")), String.valueOf(res.getDate("partFecha")), res.getInt("partScoreLoc"), res.getInt("partScoreVis"), res.getString("partGanador"),res.getString("partEstado")));
+               /* if (res.getString("partEstado").equals("Pendiente")) {
+                    par = new Partido();
+                    par.setEstado(res.getString("partEstado"));
+                    par.setEquipoLocal(ce.crearEquipo(res.getInt("idEqLoc")));
+                    par.setEquipoVisita(ce.crearEquipo(res.getInt("idEqVis")));
+                    par.setGanador(res.getString("partGanador"));
+                    par.setScoreLocal(res.getInt("partScoreLoc"));
+                    par.setScoreVisita(res.getInt("partScoreVis"));
+                    par.setIdTor(res.getInt("idTor"));
+                    par.setIdPart(res.getInt("idPart"));
+                    par.setIdEqLoc(res.getInt("idEqLoc"));
+                    par.setIdEqVis(res.getInt("idEqVis"));
+                    par.setJornada(res.getString("partJornada"));
+                    parts.add(par);
+                }*/
+                
+                parts.add(new Partido(res.getInt("idTor"),res.getInt("idPart"), res.getInt("idEqVis"), res.getInt("idEqLoc"), res.getInt("idArb"),null, ce.crearEquipo(res.getInt("idEqVis")), ce.crearEquipo(res.getInt("idEqLoc")), res.getString("partEstado"), String.valueOf(res.getTime("partHora")), String.valueOf(res.getTime("partFin")), String.valueOf(res.getDate("partFecha")), res.getInt("partScoreLoc"), res.getInt("partScoreVis"), res.getString("partGanador"),res.getString("partEstado")));
             }
             
             res.close();
@@ -105,7 +120,7 @@ public class ControlPartido implements OperacionesDB{
             cn.close();
             
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     
         

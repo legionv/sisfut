@@ -5,6 +5,8 @@
  */
 package clases;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Madeline
@@ -20,7 +22,18 @@ public class Equipo {
     private String telefono;
     private String color;
     private String nombre;
+    private ArrayList<Jugador> jugadores;
 
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(ArrayList<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+     public void setJugadores(Jugador jugador) {
+        this.jugadores.add(jugador);
+    }
     public Equipo() {
     }
 

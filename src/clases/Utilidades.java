@@ -9,6 +9,8 @@ import esquemasypantallas.frmInternal.frmInTor;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
@@ -143,5 +145,17 @@ obj.setLocation((desktopSize.width - jInternalFrameSize.width)/2,
         
         return sql;
     
+    }
+    
+    
+        public void loadCombo(ArrayList lista, JComboBox cmb){
+    
+        DefaultComboBoxModel cb = new DefaultComboBoxModel();
+        
+        for (int i = 0; i < lista.size(); i++) {
+            
+            cb.addElement(lista.get(i));
+        }
+        cmb.setModel(cb);
     }
 }

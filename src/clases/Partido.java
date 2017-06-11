@@ -18,6 +18,7 @@ public class Partido {
     private int idEqVis;
     private int idEqLoc;
     private int idArb;
+    private int idPart;
     private Arbitro arbitro;
     private Equipo equipoVisita;
     private Equipo equipoLocal;
@@ -35,7 +36,7 @@ public class Partido {
     public Partido() {
     }
 
-    public Partido(int idTor, int idEqVis, int idEqLoc, int idArb, Arbitro arbitro, Equipo equipoVisita, Equipo equipoLocal, String jornada, String hora_inicio, String hora_fin, String fecha, int scoreLocal, int scoreVisita, String ganador, String estado) {
+    public Partido(int idTor,int idPart, int idEqVis, int idEqLoc, int idArb, Arbitro arbitro, Equipo equipoVisita, Equipo equipoLocal, String jornada, String hora_inicio, String hora_fin, String fecha, int scoreLocal, int scoreVisita, String ganador, String estado) {
         this.idTor = idTor;
         this.idEqVis = idEqVis;
         this.idEqLoc = idEqLoc;
@@ -51,6 +52,15 @@ public class Partido {
         this.scoreVisita = scoreVisita;
         this.ganador = ganador;
         this.estado = estado;
+        this.idPart = idPart;
+    }
+
+    public int getIdPart() {
+        return idPart;
+    }
+
+    public void setIdPart(int idPart) {
+        this.idPart = idPart;
     }
 
     public Partido(String text, String text0, String text1, String text2, String text3, String text4) {

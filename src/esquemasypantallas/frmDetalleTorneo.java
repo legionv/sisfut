@@ -7,7 +7,9 @@ package esquemasypantallas;
 
 import clases.Partido;
 import clases.Torneo;
+import clases.Utilidades;
 import controlador.ControlPartido;
+import esquemasypantallas.frmInternal.frmModPart;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +26,15 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
     public frmDetalleTorneo(Torneo tr) {
         initComponents();
         this.tr = tr;
+        jTxtTorneo.setText(this.tr.getNombreTorneo());
         ControlPartido cp = new ControlPartido();
+        jTxtEsta.setText(this.tr.getTorEstado());
+        jTxtFechIn.setText(this.tr.getFechaInicio());
+        jTxtFechEnd.setText(this.tr.getFechaFin());
+        jTxtLugar3.setText(this.tr.getTercero());
+        jTxtLug2.setText(this.tr.getSugundo());
+        jTxtCam.setText(this.tr.getCampeon());
+        jTxtcuarto.setText(this.tr.getCuarto());
         loadData(cp.show(tr));
     }
 
@@ -54,11 +64,12 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTxtEsta = new javax.swing.JTextField();
-        jTxtCam2 = new javax.swing.JTextField();
+        jTxtCam = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTxtFechEnd = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jTxtcuarto = new javax.swing.JTextField();
+        jBtnMod = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -116,7 +127,7 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
 
         jTxtEsta.setEnabled(false);
 
-        jTxtCam2.setEnabled(false);
+        jTxtCam.setEnabled(false);
 
         jLabel9.setText("Estado");
 
@@ -125,6 +136,13 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
         jLabel10.setText("4to Lugar");
 
         jTxtcuarto.setEnabled(false);
+
+        jBtnMod.setText("Modificar");
+        jBtnMod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnModMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,7 +183,7 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
                                         .addGap(87, 87, 87)
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTxtCam2))
+                                        .addComponent(jTxtCam))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(81, 81, 81)
                                         .addComponent(jLabel5)
@@ -190,6 +208,8 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(190, 190, 190)
                 .addComponent(jBtnDetalle)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnMod)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -205,7 +225,7 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel7)
                                 .addComponent(jLabel3)
                                 .addComponent(jTxtFechIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTxtCam2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTxtCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
                                 .addComponent(jTxtLugar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -229,7 +249,9 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jBtnDetalle)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnDetalle)
+                    .addComponent(jBtnMod))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -253,9 +275,20 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBtnDetalleMouseClicked
 
+    private void jBtnModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnModMouseClicked
+        // TODO add your handling code here:
+        int i = this.jTablaPartidos.getSelectedRow();
+        Utilidades util = new Utilidades();
+        Object item = this.jTablaPartidos.getValueAt(i, 5);
+        frmModPart obj = new frmModPart(((Partido)item) );
+        JDesktopPane pane = getDesktopPane();
+        util.openForm(obj, pane);
+    }//GEN-LAST:event_jBtnModMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnDetalle;
+    private javax.swing.JButton jBtnMod;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -268,7 +301,7 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaPartidos;
-    private javax.swing.JTextField jTxtCam2;
+    private javax.swing.JTextField jTxtCam;
     private javax.swing.JTextField jTxtEsta;
     private javax.swing.JTextField jTxtFechEnd;
     private javax.swing.JTextField jTxtFechIn;
@@ -285,11 +318,15 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
         DefaultTableModel tb = new DefaultTableModel(null,cols);
         Object[] obj = new Object[6];
         for (int i = 0; i < part.size(); i++) {
-            obj[0] = "algo";//part.get(i).getFecha() ;
+            
+            
+           
+            obj[0] = ((obj[0] = part.get(i).getFecha()) != "null") ? obj[0] : "Sin Fecha" ;           
             obj[1] = part.get(i).getEquipoVisita();
             obj[2] = part.get(i).getScoreVisita() + " - " + part.get(i).getScoreLocal();
-            obj[3] = part.get(i).getGanador();
-            obj[4] = part.get(i);
+            obj[3] = part.get(i).getEquipoLocal();
+            obj[4] = part.get(i).getGanador();
+            obj[5] = part.get(i);
             tb.addRow(obj);
         }
         
