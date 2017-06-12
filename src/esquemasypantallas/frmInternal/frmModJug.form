@@ -48,7 +48,7 @@
                   <Component id="jBtnNew" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnMod" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,11 +58,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reset"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnNewMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnMod">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBtnModMouseClicked"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
 
@@ -83,12 +89,12 @@
                           </Group>
                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTxtBirth" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTxtDui" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTxtNombre" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTxtEmail" alignment="0" max="32767" attributes="0"/>
                               <Component id="jcmbPos" alignment="0" pref="110" max="32767" attributes="0"/>
                               <Component id="jTxtTel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTxtBirth" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -206,23 +212,15 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jTxtBirth">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="##/##/##" subtype="-1" type="5"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JComboBox" name="jcmbPos">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
+              <StringArray count="5">
                 <StringItem index="0" value="Seleccionar"/>
                 <StringItem index="1" value="Portero"/>
                 <StringItem index="2" value="Defensa"/>
                 <StringItem index="3" value="Volante"/>
                 <StringItem index="4" value="Delantero"/>
-                <StringItem index="5" value=" "/>
               </StringArray>
             </Property>
           </Properties>
@@ -252,6 +250,13 @@
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="1" maximum="99" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jTxtBirth">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="####-##-##" subtype="-1" type="5"/>
             </Property>
           </Properties>
         </Component>

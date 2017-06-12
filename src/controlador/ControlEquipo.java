@@ -22,6 +22,23 @@ public class ControlEquipo implements OperacionesDB{
 
     @Override
     public String insert(Object obj) {
+        Equipo equ = new Equipo();
+              String sql =  "INSERT INTO `sisfut`.`equipo`\n" +
+"(\n" +
+"`idEnt`,\n" +
+"`eqNombre`,\n" +
+"`eqEmail`,\n" +
+"`eqDir`,\n" +
+"`eqNumTar`,\n" +
+"`eqFechaIns`,\n" +
+"`eqTel`,\n" +
+"`eqColor`,\n" +
+"`eqDel`)\n" +
+"VALUES\n" +
+"("+equ.getIdEntrenador()+",'"+equ.getNombre()+"','"+equ.getEmail()+"','"+equ.getDireccion()+"',\n" +
+"'"+equ.getNumeroTar()+"',now(),'"+equ.getTelefono()+"','"+equ.getColor()+"',1);";
+        
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

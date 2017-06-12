@@ -26,6 +26,10 @@ public class frmMenu extends javax.swing.JFrame {
         initComponents();
         this.user =user;
         System.out.println(this.user.getNivel());
+        String nivel = this.user.getNivel().toLowerCase();
+        if (nivel.equals("administrador")) {
+            this.jMenu1.setVisible(false);
+        }
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
     }
      public frmMenu() {

@@ -5,6 +5,7 @@
  */
 package esquemasypantallas.frmInternal;
 import clases.Jugador;
+import controlador.ControlJugador;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -34,8 +35,6 @@ public class frmJugador extends javax.swing.JInternalFrame {
 
         jBtnNew = new javax.swing.JButton();
         jBtnAgre = new javax.swing.JButton();
-        jBtnMod = new javax.swing.JButton();
-        jBtnElim = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -58,6 +57,11 @@ public class frmJugador extends javax.swing.JInternalFrame {
         setMaximizable(true);
 
         jBtnNew.setText("Nuevo");
+        jBtnNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnNewMouseClicked(evt);
+            }
+        });
 
         jBtnAgre.setText("Agregar");
         jBtnAgre.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -65,10 +69,6 @@ public class frmJugador extends javax.swing.JInternalFrame {
                 jBtnAgreMouseClicked(evt);
             }
         });
-
-        jBtnMod.setText("Modificar");
-
-        jBtnElim.setText("Eliminar");
 
         jLabel1.setText("Nombre");
 
@@ -97,7 +97,7 @@ public class frmJugador extends javax.swing.JInternalFrame {
         }
 
         try {
-            jTxtBirth.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+            jTxtBirth.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -204,11 +204,7 @@ public class frmJugador extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jBtnNew)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnAgre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnMod)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnElim))
+                        .addComponent(jBtnAgre))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
@@ -220,10 +216,8 @@ public class frmJugador extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNew)
-                    .addComponent(jBtnAgre)
-                    .addComponent(jBtnMod)
-                    .addComponent(jBtnElim))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(jBtnAgre))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -231,7 +225,17 @@ public class frmJugador extends javax.swing.JInternalFrame {
 
     private void jBtnAgreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAgreMouseClicked
         // TODO add your handling code here:
-        llenar();
+        Jugador ju = new Jugador();
+   try {
+
+            ju = (Jugador)asignar(ju);
+           
+            ControlJugador cj = new ControlJugador();
+                JOptionPane.showMessageDialog(this, cj.insert(ju));
+                limpiar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString(), "Resultado",0);
+        }
 
     }//GEN-LAST:event_jBtnAgreMouseClicked
 
@@ -245,6 +249,11 @@ public class frmJugador extends javax.swing.JInternalFrame {
             Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_jTxtNombreKeyTyped
+
+    private void jBtnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNewMouseClicked
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jBtnNewMouseClicked
 
   
 private void llenar(){
@@ -268,8 +277,6 @@ private void llenar(){
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAgre;
-    private javax.swing.JButton jBtnElim;
-    private javax.swing.JButton jBtnMod;
     private javax.swing.JButton jBtnNew;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -289,4 +296,32 @@ private void llenar(){
     private javax.swing.JFormattedTextField jTxtTel;
     private javax.swing.JComboBox jcmbPos;
     // End of variables declaration//GEN-END:variables
+
+    private Jugador asignar(Jugador ju){
+     ju.setNombre(jTxtNombre.getText());
+        ju.setDui(jTxtDui.getText());
+        ju.setPos(jcmbPos.getSelectedItem().toString());
+        ju.setFechaNac(jTxtBirth.getText());
+        ju.setEmail(jTxtEmail.getText());
+        ju.setTarjeta(jTxtTarj.getText());
+        ju.setCamiseta(Integer.parseInt(jSpCamisa.getValue().toString()));
+        ju.setTel(jTxtTel.getText());
+        ju.setIdEq(this.idEq);
+        
+        return ju;
+}
+    
+    private void limpiar(){
+this.jTxtNombre.setText("");
+this.jTxtDui.setText("");
+this.jcmbPos.setSelectedIndex(0);
+this.jTxtBirth.setText("");
+this.jTxtEmail.setText("");
+this.jTxtTarj.setText("");
+this.jSpCamisa.setValue(0);
+this.jTxtTel.setText("");
+
+}
+
+
 }

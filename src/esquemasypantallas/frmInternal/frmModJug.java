@@ -5,6 +5,7 @@
  */
 package esquemasypantallas.frmInternal;
 import clases.Jugador;
+import controlador.ControlJugador;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -17,9 +18,11 @@ public class frmModJug extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmJugador
      */
-    public frmModJug(Jugador jug) {
+    public frmModJug(Jugador j) {
         initComponents();
-        this.jTxtNombre.setText(jug.getNombre());
+        this.modJu= j;
+        reset();
+        
     }
 
     /**
@@ -43,20 +46,30 @@ public class frmModJug extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jTxtNombre = new javax.swing.JTextField();
         jTxtDui = new javax.swing.JFormattedTextField();
-        jTxtBirth = new javax.swing.JFormattedTextField();
         jcmbPos = new javax.swing.JComboBox();
         jTxtEmail = new javax.swing.JTextField();
         jTxtTel = new javax.swing.JFormattedTextField();
         jTxtTarj = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jSpCamisa = new javax.swing.JSpinner();
+        jTxtBirth = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setMaximizable(true);
 
         jBtnNew.setText("Reset");
+        jBtnNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnNewMouseClicked(evt);
+            }
+        });
 
         jBtnMod.setText("Modificar");
+        jBtnMod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnModMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -84,13 +97,7 @@ public class frmModJug extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
-        try {
-            jTxtBirth.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        jcmbPos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Portero", "Defensa", "Volante", "Delantero", " " }));
+        jcmbPos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Portero", "Defensa", "Volante", "Delantero" }));
 
         try {
             jTxtTel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
@@ -107,6 +114,12 @@ public class frmModJug extends javax.swing.JInternalFrame {
         jLabel8.setText("Número camiseta");
 
         jSpCamisa.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
+
+        try {
+            jTxtBirth.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,12 +138,12 @@ public class frmModJug extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6))
                         .addGap(70, 70, 70)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTxtBirth)
                             .addComponent(jTxtDui)
                             .addComponent(jTxtNombre)
                             .addComponent(jTxtEmail)
                             .addComponent(jcmbPos, 0, 110, Short.MAX_VALUE)
-                            .addComponent(jTxtTel)))
+                            .addComponent(jTxtTel)
+                            .addComponent(jTxtBirth)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -205,7 +218,7 @@ public class frmModJug extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNew)
                     .addComponent(jBtnMod))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,26 +235,54 @@ public class frmModJug extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTxtNombreKeyTyped
 
-  
-private void llenar(){
+    private void jBtnModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnModMouseClicked
+        // TODO add your handling code here:
+        int op = JOptionPane.showConfirmDialog(rootPane, "Está seguro que desea modificar este Jugador?!","Confirmación",JOptionPane.YES_NO_OPTION);
+        if (op == 0) {
+             Jugador ju =new Jugador();
+             ju = asignar(ju);
+           ControlJugador cj = new ControlJugador();
+                JOptionPane.showMessageDialog(this, cj.update(ju));
+       
+            
+        }
 
-    Jugador p = new Jugador();
-    p.setEmail(jTxtEmail.getText());
-    p.setFechaNac(jTxtBirth.getText());
-    p.setCamiseta(Integer.parseInt(jSpCamisa.getValue().toString()));
-    p.setDui(jTxtDui.getText());
-    p.setEmail(jTxtEmail.getText());
-    p.setNombre(jTxtNombre.getText());
-    p.setPos(jcmbPos.getSelectedItem().toString());
-    p.setTarjeta(jTxtTarj.getText());
-    p.setTel(jTxtTel.getText());
-    if(p.validar()){
-          String m = "Datos: \n Nombre: " + p.getNombre()+ "\n DUI: " + p.getDui()+"\n Fecha Nacimiento: " + p.getFechaNac() + "\n Posición: "+ p.getPos() + "\n Email: "+ p.getEmail() + "\n Teléfono: "+ p.getTel()+ "\n Tarjeta: "+ p.getTarjeta()+"\n Camiseta: "+ p.getCamiseta() ;
-    JOptionPane.showMessageDialog(this, m);
-        getToolkit().beep();
-    }
+    }//GEN-LAST:event_jBtnModMouseClicked
+
+    private void jBtnNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnNewMouseClicked
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_jBtnNewMouseClicked
+
+  
+
+
+private Jugador asignar(Jugador ju){
+     ju.setNombre(jTxtNombre.getText());
+        ju.setDui(jTxtDui.getText());
+        ju.setPos(jcmbPos.getSelectedItem().toString());
+        ju.setFechaNac(jTxtBirth.getText());
+        ju.setEmail(jTxtEmail.getText());
+        ju.setTarjeta(jTxtTarj.getText());
+        ju.setCamiseta(Integer.parseInt(jSpCamisa.getValue().toString()));
+        ju.setTel(jTxtTel.getText());
+        ju.setIdJug(this.modJu.getIdJug());
+        System.out.println(this.modJu.getIdJug());
+        return ju;
+}    
+private void reset(){
+this.jTxtNombre.setText(modJu.getNombre());
+this.jTxtDui.setText(modJu.getDui());
+this.jcmbPos.setSelectedIndex(0);
+this.jTxtBirth.setText(modJu.getFechaNac());
+this.jTxtEmail.setText(modJu.getEmail());
+this.jTxtTarj.setText(modJu.getTarjeta());
+this.jSpCamisa.setValue(1);
+this.jTxtTel.setText(modJu.getTel());
 
 }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnMod;
     private javax.swing.JButton jBtnNew;
@@ -263,4 +304,5 @@ private void llenar(){
     private javax.swing.JFormattedTextField jTxtTel;
     private javax.swing.JComboBox jcmbPos;
     // End of variables declaration//GEN-END:variables
+private Jugador modJu;
 }

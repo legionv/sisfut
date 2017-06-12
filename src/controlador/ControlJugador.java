@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class ControlJugador implements OperacionesDB{
      @Override
-    public String insert(Object obj) {
+   public String insert(Object obj) {
        Jugador ju = (Jugador) obj;
        Database db =new Database();
        Connection cn;
@@ -36,9 +36,29 @@ public class ControlJugador implements OperacionesDB{
             st = (Statement) cn.createStatement();
             st.executeUpdate("BEGIN WORK");
             sql = "INSERT INTO `sisfut`.`jugador`\n" +
-"(`jugNom`,`jugDui`,`jugPos`,`jugFnac`,`jugEmail`,`jugNumTar`,`jugNum`,`jugTel`)\n" +
+"(\n" +
+"`idEq`,\n" +
+"`jugNom`,\n" +
+"`jugDui`,\n" +
+"`jugPos`,\n" +
+"`jugFnac`,\n" +
+"`jugEmail`,\n" +
+"`jugNumTar`,\n" +
+"`jugNum`,\n" +
+"`jugTel`,\n" +
+"`jugDel`)\n" +
 "VALUES\n" +
-"('"+ju.getNombre()+"','"+ju.getDui()+"','"+ju.getPos()+"','"+ju.getFechaNac()+"','"+ju.getEmail()+"','"+ju.getTarjeta()+"','"+ju.getCamiseta()+"','"+ju.getTel()+"','"+"',NOW(),1);";
+"(\n" +
+""+ju.getIdEq()+",\n" +
+"'"+ju.getNombre()+"',\n" +
+"'"+ju.getDui()+"',\n" +
+"'"+ju.getPos()+"',\n" +
+"'"+ju.getFechaNac()+"',\n" +
+"'"+ju.getEmail()+"',\n" +
+"'"+ju.getTarjeta()+"',\n" +
+""+ju.getCamiseta()+",\n" +
+"'"+ju.getTel()+"',\n" +
+"1);";
             
             st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             res = st.getGeneratedKeys();
@@ -85,9 +105,10 @@ public class ControlJugador implements OperacionesDB{
 "`jugFnac` = '"+ju.getFechaNac()+"',\n" +
 "`jugEmail` = '"+ju.getEmail()+"',\n" +
 "`jugNumTar` = '"+ju.getTarjeta()+"',\n" +
-"`jugNum` = '"+ju.getCamiseta()+"',\n" +
-"`jugTel` = '"+ju.getTel()+"',\n" +
-" WHERE `idJug` = "+ju.getIdJug();
+"`jugNum` = "+ju.getCamiseta()+",\n" +
+"`jugTel` = '"+ju.getTel()+"'\n" +
+"  WHERE `idJug` = "+ju.getIdJug();
+            System.out.println(sql);
             st.executeUpdate(sql);
             msj = "Jugador modificado exitosamente!";
             st.close();
@@ -142,7 +163,7 @@ public class ControlJugador implements OperacionesDB{
             res = st.executeQuery(sql);
             while (res.next()) {
                  eq = ce.crearEquipo(res.getInt("idEq"));
-                lista.add(new Jugador(res.getInt("idJug"), res.getInt("idEq"), res.getString("jugNom"), res.getInt("jugNum"), res.getString("jugTel") ,res.getString("jugEmail"), res.getString("jugNumTar"), String.valueOf(res.getDate("jufFnac")), res.getString("jugPos"), res.getString("jugDui"), eq)
+                lista.add(new Jugador(res.getInt("idJug"), res.getInt("idEq"), res.getString("jugNom"), res.getInt("jugNum"), res.getString("jugTel") ,res.getString("jugEmail"), res.getString("jugNumTar"), String.valueOf(res.getDate("jugFnac")), res.getString("jugPos"), res.getString("jugDui"), eq)
                         
                 );
                 

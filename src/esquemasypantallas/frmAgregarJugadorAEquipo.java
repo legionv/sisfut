@@ -82,6 +82,11 @@ public class frmAgregarJugadorAEquipo extends javax.swing.JInternalFrame {
         jBtnGuardar.setText("Guardar");
 
         jBtnEliminar.setText("Eliminar");
+        jBtnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnEliminarMouseClicked(evt);
+            }
+        });
 
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -261,6 +266,10 @@ public class frmAgregarJugadorAEquipo extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jBtnAgregarMouseClicked
+
+    private void jBtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnEliminarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnEliminarMouseClicked
 
     
     

@@ -5,7 +5,10 @@
  */
 package esquemasypantallas.frmInternal;
 
+import clases.Entrenador;
 import clases.Equipo;
+import clases.Utilidades;
+import controlador.ControlUsuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +27,11 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
         initComponents();
      this.eq = eq;
      jTxtNom.setText(eq.getNombre());
+       ControlUsuario cu = new ControlUsuario();
+        Utilidades util =new Utilidades();
+        util.loadCombo(cu.getEntrenadores(), jCmbEnt);
+        
+        Entrenador ent = (Entrenador) jCmbEnt.getSelectedItem();
     }
 
     /**
@@ -42,7 +50,6 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
         jTxtEmail = new javax.swing.JLabel();
         JTxtNumero2 = new javax.swing.JTextField();
         jLblIdEntren = new javax.swing.JLabel();
-        JTxtIdEntrenador = new javax.swing.JTextField();
         jIdEquipo4 = new javax.swing.JLabel();
         JTxtDireccion = new javax.swing.JTextField();
         jIdEquipo8 = new javax.swing.JLabel();
@@ -57,6 +64,7 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
         jTxtTelefono = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jTxtNom = new javax.swing.JTextField();
+        jCmbEnt = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -93,17 +101,6 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
         });
 
         jLblIdEntren.setText("Entrenador:");
-
-        JTxtIdEntrenador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTxtIdEntrenadorActionPerformed(evt);
-            }
-        });
-        JTxtIdEntrenador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTxtIdEntrenadorKeyTyped(evt);
-            }
-        });
 
         jIdEquipo4.setText("Direccion del Equipo:");
 
@@ -181,6 +178,8 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nombre Equipo");
 
+        jCmbEnt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -203,22 +202,20 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jIdEquipo8)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(3, 3, 3)
-                                                        .addComponent(jLblIdEntren)
-                                                        .addGap(45, 45, 45))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jIdEquipo4)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                                .addComponent(jIdEquipo4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(jTxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(JTxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(JTxtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(JTxtIdEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(jIdEquipo7))
+                                                    .addComponent(JTxtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jIdEquipo7)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(3, 3, 3)
+                                                .addComponent(jLblIdEntren)
+                                                .addGap(39, 39, 39)
+                                                .addComponent(jCmbEnt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLbNumero)
@@ -248,10 +245,10 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
                 .addComponent(jLblMantEquipo)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTxtIdEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLblIdEntren)
                     .addComponent(jLblEmailEquipo)
-                    .addComponent(JTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmbEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jIdEquipo4)
@@ -277,7 +274,7 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
                     .addComponent(JBtnNuevo)
                     .addComponent(JBtnModificar)
                     .addComponent(JBtnEliminar))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,19 +322,6 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Solo Ingrese Numeros","",1);
         }
     }//GEN-LAST:event_JTxtNumero2KeyTyped
-
-    private void JTxtIdEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtIdEntrenadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTxtIdEntrenadorActionPerformed
-
-    private void JTxtIdEntrenadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTxtIdEntrenadorKeyTyped
-        Character s=evt.getKeyChar();
-        if(!Character.isLetter(s) && s!=KeyEvent.VK_SPACE)
-        {
-            evt.consume();
-            JOptionPane.showMessageDialog(this, "Solo Ingrese Letras con Espacio","",1);
-        }
-    }//GEN-LAST:event_JTxtIdEntrenadorKeyTyped
 
     private void JTxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxtDireccionActionPerformed
         // TODO add your handling code here:
@@ -389,8 +373,8 @@ public class frmModEquipo extends javax.swing.JInternalFrame {
     private javax.swing.JTextField JTxtColor;
     private javax.swing.JTextField JTxtDireccion;
     private javax.swing.JTextField JTxtEmail;
-    private javax.swing.JTextField JTxtIdEntrenador;
     private javax.swing.JTextField JTxtNumero2;
+    private javax.swing.JComboBox<String> jCmbEnt;
     private javax.swing.JLabel jIdEquipo4;
     private javax.swing.JLabel jIdEquipo7;
     private javax.swing.JLabel jIdEquipo8;

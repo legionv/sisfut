@@ -8,10 +8,14 @@ package esquemasypantallas;
 import clases.Partido;
 import clases.Torneo;
 import clases.Utilidades;
+import controlador.ControlIncidencia;
 import controlador.ControlPartido;
+import controlador.ControlTorneo;
 import esquemasypantallas.frmInternal.frmModPart;
+
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,10 +29,10 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
      */
     public frmDetalleTorneo(Torneo tr) {
         initComponents();
-        ControlPartido cp = new ControlPartido();
-        loadData(cp.show(tr));
+        
+        
         this.tr = tr;
-        this.tr.setPartido(cp.show(tr));
+       reset();
         jTxtTorneo.setText(this.tr.getNombreTorneo());
         
         jTxtEsta.setText(this.tr.getTorEstado());
@@ -74,6 +78,8 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jTxtcuarto = new javax.swing.JTextField();
         jBtnMod = new javax.swing.JButton();
+        jBtnAc = new javax.swing.JButton();
+        jBtnSig = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -148,6 +154,20 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
             }
         });
 
+        jBtnAc.setText("Actualizar Tabla");
+        jBtnAc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnAcMouseClicked(evt);
+            }
+        });
+
+        jBtnSig.setText("Pasar a Siguiente Jornada");
+        jBtnSig.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnSigMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,14 +227,17 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(169, 169, 169)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBtnAc)
+                                .addGap(8, 8, 8))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(jBtnDetalle)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnMod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnSig)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(jBtnDetalle)
-                .addGap(18, 18, 18)
-                .addComponent(jBtnMod)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,18 +268,22 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)
                         .addComponent(jTxtcuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtEsta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTxtEsta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2))
+                    .addComponent(jBtnAc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnDetalle)
-                    .addComponent(jBtnMod))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jBtnMod)
+                    .addComponent(jBtnSig))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,10 +316,28 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
         util.openForm(obj, pane);
     }//GEN-LAST:event_jBtnModMouseClicked
 
+    private void jBtnAcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnAcMouseClicked
+        // TODO add your handling code here:
+        reset();
+        
+    }//GEN-LAST:event_jBtnAcMouseClicked
+
+    private void jBtnSigMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnSigMouseClicked
+        // TODO add your handling code here:
+        
+        
+        if (this.tr.getTorEstado().equals("Primera")) {
+            ControlTorneo ct = new ControlTorneo();
+            JOptionPane.showMessageDialog(rootPane, ct.SegundaJornada(this.tr));
+        }
+    }//GEN-LAST:event_jBtnSigMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnAc;
     private javax.swing.JButton jBtnDetalle;
     private javax.swing.JButton jBtnMod;
+    private javax.swing.JButton jBtnSig;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -318,9 +363,9 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
     private Torneo tr;
     
     public void loadData(ArrayList<Partido> part){
-        String[] cols = {"Fecha","Equipo Visita","Puntaje","Equipo Local","Ganador","Jornada"};
+        String[] cols = {"Fecha","Equipo Visita","Puntaje","Equipo Local","Ganador","Jornada","Estado"};
         DefaultTableModel tb = new DefaultTableModel(null,cols);
-        Object[] obj = new Object[6];
+        Object[] obj = new Object[7];
         for (int i = 0; i < part.size(); i++) {
             
             
@@ -331,6 +376,7 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
             obj[3] = part.get(i).getEquipoLocal();
             obj[4] = part.get(i).getGanador();
             obj[5] = part.get(i);
+            obj[6] = part.get(i).getEstado();
             tb.addRow(obj);
         }
         
@@ -338,6 +384,14 @@ public class frmDetalleTorneo extends javax.swing.JInternalFrame {
         
     }
 
-
+   public void reset(){
+       ControlPartido cp = new ControlPartido();
+        this.tr.setPartido(cp.show(tr));
+        ControlIncidencia ci = new ControlIncidencia();
+        for (int i = 0; i < this.tr.getPartido().size(); i++) {
+           this.tr.getPartido().get(i).setIncidencias(ci.getIncidencias(this.tr.getPartido().get(i)));
+       }
+   loadData(cp.show(tr));
+   }
 
 }

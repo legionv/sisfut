@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package formulariosNO_USAR;
+package NO_USAR;
 
 import clases.Incidencia;
 import clases.Partido;

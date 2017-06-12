@@ -11,7 +11,7 @@ import clases.Incidencia;
 import clases.Partido;
 import clases.Torneo;
 import connection.Database;
-import esquemasypantallas.frmInternal.frmModPart;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -208,7 +208,7 @@ public class ControlPartido implements OperacionesDB{
                     parts.add(par);
                 }*/
                 
-                parts.add(new Partido(res.getInt("idTor"),res.getInt("idPart"), res.getInt("idEqVis"), res.getInt("idEqLoc"), res.getInt("idArb"),null, ce.crearEquipo(res.getInt("idEqVis")), ce.crearEquipo(res.getInt("idEqLoc")), res.getString("partEstado"), String.valueOf(res.getTime("partHora")), String.valueOf(res.getTime("partFin")), String.valueOf(res.getDate("partFecha")), res.getInt("partScoreLoc"), res.getInt("partScoreVis"), res.getString("partGanador"),res.getString("partEstado")));
+                parts.add(new Partido(res.getInt("idTor"),res.getInt("idPart"), res.getInt("idEqVis"), res.getInt("idEqLoc"), res.getInt("idArb"),null, ce.crearEquipo(res.getInt("idEqVis")), ce.crearEquipo(res.getInt("idEqLoc")), res.getString("partJornada"), String.valueOf(res.getTime("partHora")), String.valueOf(res.getTime("partFin")), String.valueOf(res.getDate("partFecha")), res.getInt("partScoreLoc"), res.getInt("partScoreVis"), res.getString("partGanador"),res.getString("partEstado")));
             }
             
             res.close();

@@ -10,7 +10,7 @@ import clases.*;
 import controlador.ControlTorneo;
 import esquemasypantallas.frmInternal.frmInTor;
 import esquemasypantallas.frmInternal.frmModTor;
-import formulariosNO_USAR.frmTorneos;
+import NO_USAR.frmTorneos;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;

@@ -743,10 +743,10 @@ public class frmModPart extends javax.swing.JInternalFrame {
        
        ControlPartido cp = new ControlPartido ();
        JOptionPane.showMessageDialog(rootPane,mensaje+"\n"+cp.update(p) );
-       
+       this.dispose();
        }
        
-       
+
        
     
    }
