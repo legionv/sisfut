@@ -35,7 +35,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,64 +57,47 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jIdEquipo4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="JTxtDireccion" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="JTxtColor" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="jIdEquipo7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  <Component id="jLblIdEntren" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="jCmbEnt" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="JBtnGuardar" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jTxtNom" min="-2" pref="95" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLbNumero" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTxtEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLblEmailEquipo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="JBtnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="JBtnGuardar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="JBtnNuevo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="JBtnModificar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="JBtnEliminar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="JTxtEmail" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="JTxtNumero2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jIdEquipo8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jIdEquipo4" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Component id="jTxtFecha" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
-                                                      <Component id="JTxtDireccion" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
-                                                      <Component id="JTxtColor" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Component id="jIdEquipo7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                                  <Component id="jLblIdEntren" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                                  <Component id="jCmbEnt" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLbNumero" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jTxtEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLblEmailEquipo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="JTxtEmail" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                                              <Component id="JTxtNumero2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jTxtTelefono" alignment="0" pref="96" max="32767" attributes="0"/>
-                                              <Component id="jTxtNom" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="jTxtTelefono" min="-2" pref="96" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -123,7 +106,7 @@
                           <Component id="jLblMantEquipo" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -147,29 +130,27 @@
                       <Component id="JTxtNumero2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jIdEquipo8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLbNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTxtFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTxtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="JTxtColor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTxtNom" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLbNumero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="JTxtColor" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jIdEquipo7" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="JBtnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="JBtnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="JBtnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JBtnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="153" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -221,11 +202,6 @@
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTxtDireccionKeyTyped"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jIdEquipo8">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha Inscripcion:"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLbNumero">
           <Properties>
             <Property name="text" type="java.lang.String" value="Telefono Equipo:"/>
@@ -242,35 +218,12 @@
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTxtColorKeyTyped"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="JBtnNuevo">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/nuevo.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Nuevo"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBtnNuevoActionPerformed"/>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="JBtnNuevoPropertyChange"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="JBtnModificar">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/modificar.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Modificar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBtnModificarActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="JBtnEliminar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/eliminar.png"/>
+              <Image iconType="3" name="/imagenes/reset.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="text" type="java.lang.String" value="Reset"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="JBtnGuardar">
@@ -283,13 +236,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JBtnGuardarMouseClicked"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jTxtFecha">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="##/##/####" subtype="-1" type="5"/>
-            </Property>
-          </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jTxtTelefono">
           <Properties>
@@ -316,6 +262,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCmbEntActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

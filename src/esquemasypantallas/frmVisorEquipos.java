@@ -28,6 +28,7 @@ public class frmVisorEquipos extends javax.swing.JInternalFrame {
         initComponents();
         ControlEquipo ce = new ControlEquipo();
         llenarTabla(ce.show());
+        reset();
     }
 
     /**
@@ -45,6 +46,8 @@ public class frmVisorEquipos extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jBtnMod = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTxtFiltnom = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -92,6 +95,14 @@ public class frmVisorEquipos extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Filtrar Resultado");
+
+        jTxtFiltnom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTxtFiltnomKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,6 +110,7 @@ public class frmVisorEquipos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -107,14 +119,23 @@ public class frmVisorEquipos extends javax.swing.JInternalFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jTxtFiltnom, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTxtFiltnom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -122,7 +143,7 @@ public class frmVisorEquipos extends javax.swing.JInternalFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jBtnMod))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
 
         pack();
@@ -149,7 +170,7 @@ public class frmVisorEquipos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jBtnModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnModMouseClicked
-        // TODO add your handling code here:
+       
         int i = this.jTable2.getSelectedRow();
         if (i != -1) {
             Equipo eq = (Equipo) this.jTable2.getValueAt(i, 1);
@@ -170,14 +191,21 @@ public class frmVisorEquipos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
+    private void jTxtFiltnomKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtFiltnomKeyTyped
+        // TODO add your handling code here:
+        filtrar();
+    }//GEN-LAST:event_jTxtFiltnomKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnMod;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTxtFiltnom;
     // End of variables declaration//GEN-END:variables
 
  public void llenarTabla(ArrayList<Equipo> equipos){
@@ -203,5 +231,21 @@ DefaultTableModel tm= new DefaultTableModel(null,columnas);
      
  }
 
-
+  public void filtrar(){
+ 
+     String filtro = this.jTxtFiltnom.getText();
+     
+     ControlEquipo eq = new ControlEquipo();
+     llenarTabla(eq.filtrar(filtro));
+ }
+ public void reset(){
+  try {
+            ControlEquipo ce = new ControlEquipo();
+            ArrayList<Equipo> e = ce.show();
+            llenarTabla(e);
+        } catch (Exception e) {
+        }
+ }
 }
+
+

@@ -20,11 +20,19 @@ import java.util.ArrayList;
  */
 public class ControlEquipo implements OperacionesDB{
 
-    @Override
-    public String insert(Object obj) {
-        Equipo equ = new Equipo();
-              String sql =  "INSERT INTO `sisfut`.`equipo`\n" +
-"(\n" +
+public String insert(Object obj) {
+        Database db =new Database();
+        Connection cn;
+        Statement st;
+        ResultSet res;
+        String sql; 
+        String msj=null;
+        Equipo equ = (Equipo) obj;
+         try {
+            Class.forName(db.getDriver());
+            cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = cn.createStatement();
+            sql="insert into  `sisfut`.`equipo`(\n" +
 "`idEnt`,\n" +
 "`eqNombre`,\n" +
 "`eqEmail`,\n" +
@@ -36,22 +44,56 @@ public class ControlEquipo implements OperacionesDB{
 "`eqDel`)\n" +
 "VALUES\n" +
 "("+equ.getIdEntrenador()+",'"+equ.getNombre()+"','"+equ.getEmail()+"','"+equ.getDireccion()+"',\n" +
-"'"+equ.getNumeroTar()+"',now(),'"+equ.getTelefono()+"','"+equ.getColor()+"',1);";
-        
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+"'"+equ.getNumeroTar()+"',now(),'"+equ.getTelefono()+"','"+equ.getColor()+"',1);";    
+           st.executeUpdate(sql);
+           st.close();
+           cn.close();
+           msj="Datos insertados correctamente";
+       }catch(Exception e){
+           msj=e.toString();
+       }
+       return msj;
     }
+
+   
 
     @Override
     public String update(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Database db =new Database();
+        Connection cn;
+        Statement st;
+        ResultSet res;
+        String sql; 
+        String msj=null;
+        Equipo equ = (Equipo) obj;
+         try {
+            Class.forName(db.getDriver());
+            cn = (Connection)DriverManager.getConnection(db.getUrl(),db.getUser(),db.getPass());
+            st = cn.createStatement();
+            sql="update equipo set idEnt="+equ.getIdEntrenador()+",eqEmail= '"+equ.getEmail()
+                   +"', eqDir= '"+equ.getDireccion()+"', eqNumTar = '"+equ.getNumeroTar()+
+                    "',eqTel = '"+equ.getTelefono()+"', eqNombre= '"+equ.getNombre()+
+                    "' where idEq="+equ.getIdEq();
+            System.out.println(sql);
+           st.executeUpdate(sql);
+             
+           st.close();
+           cn.close();
+           msj="Datos Actualizados correctamente";
+       }catch(Exception e){
+           msj=e.toString();
+             System.out.println(e.getStackTrace()[0].getLineNumber());
+       }
+       return msj;
     }
 
     @Override
     public String delete(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+ public ArrayList<Equipo> filtrar(String filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     @Override
     public ArrayList show() {
          Database db =new Database();
